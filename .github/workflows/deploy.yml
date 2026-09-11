@@ -27,6 +27,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: linux-devops-portal
-          directory: dist
-          branch: main
+          command: pages deploy dist --project-name=linux-devops-portal --branch=main

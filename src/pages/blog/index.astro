@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const allPosts = (await getCollection('posts'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Блог — LinuxDev Portal" description="Technical deep-dives за Linux, DevOps и modern infrastructure.">
+  <Header slot="header" />
+
+  <section class="pt-16 pb-12 relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg opacity-30"></div>
+    <div class="container-custom relative">
+      <div class="max-w-3xl">
+        <div class="badge mb-4">Blog</div>
+        <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+          Technical Blog
+        </h1>
+        <p class="text-lg text-surface-300 leading-relaxed">
+          Deep-dives, analysis и practical guides. Пишем за това, което наистина работи в production.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 pb-24">
+    <div class="container-custom">
+      {allPosts.length === 0 ? (
+        <p class="text-surface-400 text-center py-20">Скоро ще има нови материали...</p>
+      ) : (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allPosts.map((post) => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              category={post.data.category}
+              tags={post.data.tags}
+              readTime={post.data.readTime}
+              featured={post.data.featured}
+              heroImage={post.data.heroImage}
+              heroImageAlt={post.data.heroImageAlt}
+              href={`/blog/${post.id}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

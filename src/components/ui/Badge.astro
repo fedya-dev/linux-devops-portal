@@ -1,0 +1,19 @@
+---
+interface Props {
+  variant?: 'default' | 'category' | 'level' | 'tag';
+  class?: string;
+}
+
+const { variant = 'default', class: className = '' } = Astro.props;
+
+const variants = {
+  default: 'bg-brand-500/10 text-brand-400 border-brand-500/20',
+  category: 'bg-brand-500/10 text-brand-400 border-brand-500/20',
+  level: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
+  tag: 'bg-surface-800 text-surface-400 border-surface-700',
+};
+---
+
+<span class={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium border ${variants[variant]} ${className}`}>
+  <slot />
+</span>

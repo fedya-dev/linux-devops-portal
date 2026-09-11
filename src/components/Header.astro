@@ -1,0 +1,96 @@
+---
+import { mainNav } from '../data/navigation';
+
+const currentPath = Astro.url.pathname;
+
+const isActive = (href: string) => {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+};
+---
+
+<header class="sticky top-0 z-50 border-b border-surface-800/80 bg-surface-950/80 backdrop-blur-xl">
+  <div class="container-custom">
+    <div class="flex items-center justify-between h-16">
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="relative">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-lg shadow-brand-500/30 group-hover:shadow-brand-400/50 transition-shadow">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-bold text-white text-lg leading-tight tracking-tight">
+            Linux<span class="text-brand-400">Dev</span>
+          </span>
+          <span class="text-[10px] uppercase tracking-widest text-surface-500 font-medium -mt-0.5">Portal</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-1">
+        {mainNav.map((item) => {
+          const active = isActive(item.href);
+          return (
+            <a
+              href={item.href}
+              class:list={[
+                'px-3 py-2 text-sm font-medium rounded-lg transition-colors relative group',
+                active
+                  ? 'text-brand-400 bg-brand-500/10'
+                  : 'text-surface-300 hover:text-white hover:bg-surface-800/80'
+              ]}
+            >
+              {item.label}
+              {active && (
+                <span class="absolute bottom-1 left-3 right-3 h-0.5 bg-brand-500 rounded-full"></span>
+              )}
+            </a>
+          );
+        })}
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="/tutorials/wireguard-vpn-two-servers" class="hidden sm:inline-flex btn-primary text-sm py-2 px-4">
+          Започни
+        </a>
+        <button
+          id="mobile-menu-btn"
+          class="lg:hidden p-2 rounded-lg text-surface-300 hover:bg-surface-800 hover:text-white transition-colors"
+          aria-label="Меню"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-surface-800 bg-surface-950">
+    <nav class="container-custom py-4 flex flex-col gap-1">
+      {mainNav.map((item) => {
+        const active = isActive(item.href);
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              'px-4 py-3 text-sm font-medium rounded-lg transition-colors',
+              active
+                ? 'text-brand-400 bg-brand-500/10'
+                : 'text-surface-300 hover:text-white hover:bg-surface-800/80'
+            ]}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+</script>

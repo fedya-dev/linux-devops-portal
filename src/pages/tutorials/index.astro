@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import TutorialCard from '../../components/TutorialCard.astro';
+
+const allTutorials = (await getCollection('tutorials'))
+  .filter((t) => !t.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Уроци — LinuxDev Portal" description="Практически, step-by-step ръководства за Linux и DevOps.">
+  <Header slot="header" />
+
+  <section class="pt-16 pb-12 relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg opacity-30"></div>
+    <div class="container-custom relative">
+      <div class="max-w-3xl">
+        <div class="badge mb-4">Learning</div>
+        <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+          Уроци & Guides
+        </h1>
+        <p class="text-lg text-surface-300 leading-relaxed">
+          Практически, step-by-step ръководства. От zero до production-ready.
+          Всяко туториал идва с примерен код и lab environment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 pb-24">
+    <div class="container-custom">
+      {allTutorials.length === 0 ? (
+        <p class="text-surface-400 text-center py-20">Скоро ще има нови туториали...</p>
+      ) : (
+        <div class="grid md:grid-cols-2 gap-6">
+          {allTutorials.map((t) => (
+            <TutorialCard
+              title={t.data.title}
+              description={t.data.description}
+              category={t.data.category}
+              level={t.data.level}
+              duration={t.data.duration}
+              tags={t.data.tags}
+              href={`/tutorials/${t.id}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

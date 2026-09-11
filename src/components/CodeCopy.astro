@@ -1,0 +1,72 @@
+---
+/**
+ * Global script: adds "Копирай" button to every <pre> code block.
+ * Include once in BaseLayout or article layouts.
+ */
+---
+
+<script is:inline>
+  (function () {
+    function initCodeCopy() {
+      document.querySelectorAll('pre').forEach((pre) => {
+        if (pre.dataset.copyReady) return;
+        pre.dataset.copyReady = '1';
+
+        // wrapper
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-block-wrapper';
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+
+        // button
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'code-copy-btn';
+        btn.setAttribute('aria-label', 'Копирай кода');
+        btn.innerHTML = `
+          <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2"/>
+            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+          </svg>
+          <svg class="check-icon hidden" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+          <span class="btn-label">Копирай</span>
+        `;
+
+        btn.addEventListener('click', async () => {
+          const code = pre.querySelector('code')?.innerText ?? pre.innerText;
+          try {
+            await navigator.clipboard.writeText(code);
+            btn.classList.add('copied');
+            btn.querySelector('.btn-label').textContent = 'Копирано!';
+            btn.querySelector('.copy-icon')?.classList.add('hidden');
+            btn.querySelector('.check-icon')?.classList.remove('hidden');
+            setTimeout(() => {
+              btn.classList.remove('copied');
+              btn.querySelector('.btn-label').textContent = 'Копирай';
+              btn.querySelector('.copy-icon')?.classList.remove('hidden');
+              btn.querySelector('.check-icon')?.classList.add('hidden');
+            }, 2000);
+          } catch {
+            btn.querySelector('.btn-label').textContent = 'Грешка';
+            setTimeout(() => {
+              btn.querySelector('.btn-label').textContent = 'Копирай';
+            }, 1500);
+          }
+        });
+
+        wrapper.appendChild(btn);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCodeCopy);
+    } else {
+      initCodeCopy();
+    }
+
+    // Astro view transitions support
+    document.addEventListener('astro:page-load', initCodeCopy);
+  })();
+</script>

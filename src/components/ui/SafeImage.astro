@@ -1,0 +1,38 @@
+---
+/**
+ * Global image component with fallback on error.
+ * Use this for all content images (hero, inline, cards).
+ */
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  width?: number | string;
+  height?: number | string;
+  loading?: 'lazy' | 'eager';
+  /** Fallback shown when image fails to load */
+  fallbackSrc?: string;
+}
+
+const {
+  src,
+  alt,
+  class: className = '',
+  width,
+  height,
+  loading = 'lazy',
+  fallbackSrc = '/images/fallback.svg',
+} = Astro.props;
+---
+
+<img
+  src={src}
+  alt={alt}
+  class={className}
+  width={width}
+  height={height}
+  loading={loading}
+  decoding="async"
+  data-fallback={fallbackSrc}
+  onerror="this.onerror=null; this.src=this.dataset.fallback; this.classList.add('img-fallback');"
+/>

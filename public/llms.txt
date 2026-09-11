@@ -1,0 +1,25 @@
+# LinuxDev Portal
+
+> Практически уроци и статии за Linux, DevOps и модерна инфраструктура. Технически deep-dives, step-by-step ръководства и production-ready примери.
+
+LinuxDev Portal е български технически блог, фокусиран върху Linux системи, DevOps практики и модерна инфраструктура. Съдържанието включва както теоретични анализи, така и практически ръководства с примерен код.
+
+## Основни секции
+
+- [Блог](https://linuxdev.fedia.eu/blog): Deep-dive статии и анализи
+- [Уроци](https://linuxdev.fedia.eu/tutorials): Практически step-by-step ръководства
+
+## Категории
+
+- [Linux](https://linuxdev.fedia.eu/linux): Linux системи, kernel, мрежи
+- [DevOps](https://linuxdev.fedia.eu/devops): GitOps, CI/CD, Kubernetes, automation
+- [Technologies](https://linuxdev.fedia.eu/technologies): Инструменти и платформи
+- [Security](https://linuxdev.fedia.eu/security): Hardening, криптография, сигурност
+- [Cloud](https://linuxdev.fedia.eu/cloud): AWS, GCP, Azure, cloud-native
+- [Tools](https://linuxdev.fedia.eu/tools): Практични инструменти и скриптове
+
+## За проекта
+
+- Автор: LinuxDev Team
+- Език: Български
+- Фокус: Linux, DevOps, Infrastructure

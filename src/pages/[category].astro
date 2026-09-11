@@ -1,0 +1,161 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/PostCard.astro';
+import TutorialCard from '../components/TutorialCard.astro';
+
+export async function getStaticPaths() {
+  const categories = ['Linux', 'DevOps', 'Technologies', 'Security', 'Cloud', 'Tools'] as const;
+  return categories.map((category) => ({
+    params: { category: category.toLowerCase() },
+    props: { category },
+  }));
+}
+
+const CATEGORIES = ['Linux', 'DevOps', 'Technologies', 'Security', 'Cloud', 'Tools'] as const;
+type Category = (typeof CATEGORIES)[number];
+
+const { category } = Astro.props as { category: Category };
+
+const posts = (await getCollection('posts'))
+  .filter((p) => !p.data.draft && p.data.category === category)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const tutorials = (await getCollection('tutorials'))
+  .filter((t) => !t.data.draft && t.data.category === category)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const totalCount = posts.length + tutorials.length;
+
+const meta: Record<Category, { title: string; heading: string; description: string }> = {
+  Linux: {
+    title: 'Linux — LinuxDev Portal',
+    heading: 'Linux Mastery',
+    description: 'От базови команди до kernel internals. Всичко за production-ready Linux.',
+  },
+  DevOps: {
+    title: 'DevOps — LinuxDev Portal',
+    heading: 'DevOps Engineering',
+    description: 'CI/CD, infrastructure as code, observability и всичко между тях.',
+  },
+  Technologies: {
+    title: 'Technologies — LinuxDev Portal',
+    heading: 'Technologies',
+    description: 'Инструменти, езици и платформи, които използваме ежедневно.',
+  },
+  Security: {
+    title: 'Security — LinuxDev Portal',
+    heading: 'Security',
+    description: 'Hardening, криптография и защита на production системи.',
+  },
+  Cloud: {
+    title: 'Cloud — LinuxDev Portal',
+    heading: 'Cloud',
+    description: 'AWS, GCP, Azure и cloud-native архитектури.',
+  },
+  Tools: {
+    title: 'Tools — LinuxDev Portal',
+    heading: 'Tools & Scripts',
+    description: 'Практични инструменти, скриптове и помощни ресурси за ежедневна работа.',
+  },
+};
+
+const page = meta[category];
+---
+
+<BaseLayout title={page.title} description={page.description}>
+  <Header slot="header" />
+
+  <section class="pt-16 pb-12 relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg opacity-30"></div>
+    <div class="container-custom relative">
+      <div class="max-w-3xl">
+        <div class="badge mb-4">{category}</div>
+        <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+          {page.heading}
+        </h1>
+        <p class="text-lg text-surface-300 leading-relaxed">
+          {page.description}
+        </p>
+        {totalCount > 0 && (
+          <p class="text-sm text-surface-500 mt-4">
+            {totalCount} {totalCount === 1 ? 'материал' : 'материала'} в тази категория
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+
+  {tutorials.length > 0 && (
+    <section class="py-12">
+      <div class="container-custom">
+        <div class="flex items-end justify-between mb-8">
+          <div>
+            <h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-2">Уроци</h2>
+            <p class="text-surface-400 text-sm">Практически ръководства стъпка по стъпка</p>
+          </div>
+          <a href="/tutorials" class="text-brand-400 hover:text-brand-300 font-medium text-sm">
+            Всички уроци →
+          </a>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+          {tutorials.map((t) => (
+            <TutorialCard
+              title={t.data.title}
+              description={t.data.description}
+              category={t.data.category}
+              level={t.data.level}
+              duration={t.data.duration}
+              tags={t.data.tags}
+              href={`/tutorials/${t.id}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {posts.length > 0 && (
+    <section class="py-12 pb-24">
+      <div class="container-custom">
+        <div class="flex items-end justify-between mb-8">
+          <div>
+            <h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-2">Статии</h2>
+            <p class="text-surface-400 text-sm">Deep-dives и анализи</p>
+          </div>
+          <a href="/blog" class="text-brand-400 hover:text-brand-300 font-medium text-sm">
+            Всички статии →
+          </a>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              category={post.data.category}
+              tags={post.data.tags}
+              readTime={post.data.readTime}
+              featured={post.data.featured}
+              heroImage={post.data.heroImage}
+              heroImageAlt={post.data.heroImageAlt}
+              href={`/blog/${post.id}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {totalCount === 0 && (
+    <section class="py-24 pb-32">
+      <div class="container-custom text-center">
+        <p class="text-surface-400">Скоро ще има материали в тази категория...</p>
+      </div>
+    </section>
+  )}
+
+  <Footer slot="footer" />
+</BaseLayout>

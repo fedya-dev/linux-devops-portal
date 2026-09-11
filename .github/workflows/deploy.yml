@@ -7,7 +7,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,5 +26,7 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: 'f955e3f98897f434614871b91339feac'
-          command: pages deploy dist --project-name=linux-devops-portal
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: linux-devops-portal
+          directory: dist
+          branch: main

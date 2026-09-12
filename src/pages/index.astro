@@ -131,7 +131,7 @@ const features = [
         <h2 class="section-title">Последни материали</h2>
         <p class="section-subtitle mx-auto">Свежи technical deep-dives</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {allPosts.map((post) => (
           <PostCard
             title={post.data.title}
@@ -141,6 +141,8 @@ const features = [
             tags={post.data.tags}
             readTime={post.data.readTime}
             featured={post.data.featured}
+            heroImage={post.data.heroImage}
+            heroImageAlt={post.data.heroImageAlt}
             href={`/blog/${post.id}`}
           />
         ))}

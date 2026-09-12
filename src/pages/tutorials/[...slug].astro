@@ -29,6 +29,13 @@ const levelColor = tutorial.data.level === 'Advanced'
   title={`${tutorial.data.title} — LinuxDev Portal`} 
   description={tutorial.data.description}
   image={tutorial.data.heroImage}
+  pageType="article"
+  article={{
+    headline: tutorial.data.title,
+    datePublished: tutorial.data.pubDate.toISOString(),
+    author: 'LinuxDev Team',
+    image: tutorial.data.heroImage,
+  }}
 >
   <Header slot="header" />
   

@@ -23,6 +23,14 @@ const { Content } = await render(post);
   title={`${post.data.title} — LinuxDev Portal`} 
   description={post.data.description}
   image={post.data.heroImage}
+  pageType="article"
+  article={{
+    headline: post.data.title,
+    datePublished: post.data.pubDate.toISOString(),
+    dateModified: post.data.updatedDate?.toISOString() || post.data.pubDate.toISOString(),
+    author: post.data.author,
+    image: post.data.heroImage,
+  }}
 >
   <Header slot="header" />
   

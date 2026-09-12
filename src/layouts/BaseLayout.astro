@@ -1,18 +1,82 @@
 ---
 import '../styles/global.css';
 import CodeCopy from '../components/CodeCopy.astro';
+import { Schema } from 'astro-seo-schema';
+import type { WebSite, WithContext } from 'schema-dts';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  /** Тип на страницата — за по-точна схема */
+  pageType?: 'website' | 'article';
+  /** За article страници */
+  article?: {
+    headline: string;
+    datePublished: string;
+    dateModified?: string;
+    author?: string;
+    image?: string;
+  };
 }
 
 const { 
   title = 'Linux DevOps Portal — Next-Gen Technical Hub',
   description = 'Специализиран технически портал от следващо поколение за Linux, Technologies & DevOps.',
   image,
+  pageType = 'website',
+  article,
 } = Astro.props;
+
+const siteUrl = 'https://linuxdev.fedia.eu';
+const currentUrl = new URL(Astro.url.pathname, siteUrl).toString();
+
+// WebSite схема — показва на Google името на сайта и търсачката
+const websiteSchema: WithContext<WebSite> = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'LinuxDev Portal',
+  alternateName: 'Linux DevOps Portal',
+  url: siteUrl,
+  description: description,
+  inLanguage: 'bg-BG',
+  publisher: {
+    '@type': 'Organization',
+    name: 'LinuxDev Portal',
+    url: siteUrl,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteUrl}/favicon.svg`,
+    },
+  },
+};
+
+// Article схема — само за blog/tutorial страници
+const articleSchema = article ? {
+  '@context': 'https://schema.org' as const,
+  '@type': 'Article' as const,
+  headline: article.headline,
+  description: description,
+  image: article.image ? `${siteUrl}${article.image}` : undefined,
+  datePublished: article.datePublished,
+  dateModified: article.dateModified || article.datePublished,
+  author: {
+    '@type': 'Person' as const,
+    name: article.author || 'LinuxDev Team',
+  },
+  publisher: {
+    '@type': 'Organization' as const,
+    name: 'LinuxDev Portal',
+    logo: {
+      '@type': 'ImageObject' as const,
+      url: `${siteUrl}/favicon.svg`,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage' as const,
+    '@id': currentUrl,
+  },
+} : null;
 ---
 
 <!doctype html>
@@ -24,22 +88,41 @@ const {
     <meta name="theme-color" content="#0f172a" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
-    
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={currentUrl} />
+
+    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    {image && <meta property="og:image" content={image} />}
-    
+    <meta property="og:type" content={pageType === 'article' ? 'article' : 'website'} />
+    <meta property="og:url" content={currentUrl} />
+    <meta property="og:site_name" content="LinuxDev Portal" />
+    <meta property="og:locale" content="bg_BG" />
+    {image && <meta property="og:image" content={image.startsWith('http') ? image : `${siteUrl}${image}`} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={image.startsWith('http') ? image : `${siteUrl}${image}`} />}
+
+    <!-- Schema.org: WebSite -->
+    <Schema item={websiteSchema} />
+
+    <!-- Schema.org: Article (само за article страници) -->
+    {articleSchema && <Schema item={articleSchema} />}
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body class="min-h-screen flex flex-col">
     <slot name="header" />
-    
+
     <main class="flex-1">
       <slot />
     </main>
-    
+
     <slot name="footer" />
 
     <!-- Global: Copy button for all code blocks -->

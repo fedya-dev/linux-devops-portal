@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Практичен reference и checklist за създаване, тестване и публикуване на статии в LinuxDev Portal.">
+  <title>Шаблон за статия — LinuxDev Portal</title>
+  <style>
+    :root { --bg:#0b1220; --panel:#111c31; --panel2:#16243d; --text:#e8eef8; --muted:#a8b5ca; --line:#263957; --accent:#62d3a8; --accent2:#75a9ff; --warn:#ffd166; --code:#09101c; --shadow:0 18px 50px #0005; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:linear-gradient(135deg,#08101d,#101c32 55%,#0b1220); color:var(--text); font:16px/1.7 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    a { color:var(--accent2); text-decoration:none; } a:hover { text-decoration:underline; }
+    .layout { display:grid; grid-template-columns:280px minmax(0,860px); gap:28px; max-width:1200px; margin:auto; padding:28px 20px 70px; }
+    aside { position:sticky; top:20px; height:max-content; max-height:calc(100vh - 40px); overflow:auto; background:#0d182aee; border:1px solid var(--line); border-radius:18px; padding:22px; box-shadow:var(--shadow); }
+    .brand { display:flex; gap:10px; align-items:center; font-weight:800; font-size:1.1rem; color:var(--text); margin-bottom:20px; } .logo { width:34px; height:34px; display:grid; place-items:center; border-radius:10px; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#07111c; font-weight:900; }
+    nav a { display:block; padding:8px 10px; border-radius:9px; color:var(--muted); font-size:.93rem; } nav a:hover { color:var(--text); background:#ffffff0d; text-decoration:none; }
+    main { min-width:0; } .hero { background:linear-gradient(135deg,#152d48,#142036); border:1px solid var(--line); border-radius:24px; padding:42px 42px 35px; box-shadow:var(--shadow); margin-bottom:24px; }
+    .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.12em; font-size:.78rem; font-weight:800; } h1 { margin:8px 0 12px; font-size:clamp(2.1rem,5vw,4rem); line-height:1.08; letter-spacing:-.04em; } h2 { margin-top:48px; padding-top:12px; border-top:1px solid var(--line); font-size:1.75rem; } h3 { margin-top:30px; color:#cfe0ff; } p { color:var(--muted); } .lead { font-size:1.1rem; max-width:700px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; } .chip { border:1px solid #ffffff22; background:#ffffff0b; border-radius:999px; padding:5px 11px; color:#d7e4f7; font-size:.84rem; }
+    article { background:#0d1829d9; border:1px solid var(--line); border-radius:20px; padding:10px 42px 45px; box-shadow:var(--shadow); } code { background:#ffffff12; padding:.15em .38em; border-radius:5px; color:#b9f5de; } pre { overflow:auto; background:var(--code); border:1px solid #21324d; border-radius:12px; padding:18px; color:#d7e7ff; } pre code { background:none; padding:0; color:inherit; }
+    table { width:100%; border-collapse:collapse; margin:18px 0 25px; display:block; overflow-x:auto; } th,td { text-align:left; vertical-align:top; padding:12px 14px; border-bottom:1px solid var(--line); min-width:150px; } th { color:var(--accent); background:#ffffff08; } td { color:var(--muted); }
+    blockquote { margin:22px 0; padding:14px 18px; border-left:4px solid var(--warn); background:#ffd16612; border-radius:0 10px 10px 0; color:#e9dfc1; } ul,ol { color:var(--muted); padding-left:25px; } li { margin:7px 0; } .check { color:var(--accent); font-weight:700; }
+    footer { text-align:center; color:var(--muted); padding:22px; font-size:.9rem; } .top { display:inline-block; margin-top:16px; font-size:.9rem; }
+    @media (max-width:800px) { .layout { display:block; padding:14px 12px 45px; } aside { position:relative; top:auto; max-height:none; margin-bottom:16px; } nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2px; } .hero { padding:30px 24px; } article { padding:4px 24px 35px; } h2 { font-size:1.45rem; } }
+  </style>
+</head>
+<body id="top">
+  <div class="layout">
+    <aside>
+      <a class="brand" href="#top"><span class="logo">LD</span> LinuxDev Portal</a>
+      <nav aria-label="Съдържание">
+        <a href="#frontmatter">1. Frontmatter</a><a href="#structure">2. Структура</a><a href="#formatting">3. Форматиране</a><a href="#style">4. Стил</a><a href="#testing">5. Тестване</a><a href="#deploy">6. Deploy</a><a href="#navigation">Навигация и layout</a><a href="#content">Съдържание и рутинг</a><a href="#workflow">Ежедневен workflow</a><a href="#sync">Синхронизиране</a>
+      </nav>
+    </aside>
+    <main>
+      <header class="hero">
+        <div class="eyebrow">Reference · Checklist</div>
+        <h1>Шаблон за статия</h1>
+        <p class="lead">Практична справка за създаване, форматиране, локално тестване и публикуване на статии в LinuxDev Portal.</p>
+        <div class="chips"><span class="chip">Markdown</span><span class="chip">Astro</span><span class="chip">SEO</span><span class="chip">Cloudflare Pages</span></div>
+      </header>
+      <article>
+        <section id="frontmatter"><h2>1. Frontmatter</h2><p>Всеки файл започва и завършва с <code>---</code>.</p><pre><code>---
+title: "Заглавие на статията"
+description: "1-2 изречения — показват се в листинга и в Google"
+pubDate: 2026-09-12
+category: "DevOps"
+tags: ["Tag1", "Tag2", "Tag3"]
+author: "LinuxDev Team"
+featured: false
+readTime: "12 мин"
+heroImage: "/images/category/slug.webp"
+heroImageAlt: "Alt текст за картинката"
+---</code></pre>
+        <table><thead><tr><th>Поле</th><th>Задължително</th><th>Описание</th></tr></thead><tbody><tr><td><code>title</code></td><td>✅</td><td>Заглавие на статията</td></tr><tr><td><code>description</code></td><td>✅</td><td>1–2 изречения за листинг и SEO</td></tr><tr><td><code>pubDate</code></td><td>✅</td><td>Дата във формат <code>YYYY-MM-DD</code></td></tr><tr><td><code>category</code></td><td>✅</td><td>Една от шестте категории: Linux, DevOps, Technologies, Security, Cloud, Tools</td></tr><tr><td><code>tags</code></td><td>❌</td><td>Масив от тагове, показвани като badge-ове</td></tr><tr><td><code>author</code></td><td>❌</td><td>По подразбиране „LinuxDev Team“</td></tr><tr><td><code>featured</code></td><td>❌</td><td><code>true</code>, ако статията е във featured секцията</td></tr><tr><td><code>readTime</code></td><td>❌</td><td>Приблизително време за четене</td></tr><tr><td><code>heroImage</code></td><td>❌</td><td>Път в <code>public/images/...</code>, започващ с <code>/</code></td></tr><tr><td><code>heroImageAlt</code></td><td>❌</td><td>Alt текст за картинката</td></tr></tbody></table>
+        <blockquote><strong>Важно:</strong> <code>category</code> трябва да бъде точно една от шестте категории, а <code>pubDate</code> — само дата без час.</blockquote></section>
+        <section id="structure"><h2>2. Структура на съдържанието</h2><p>След затварящия frontmatter следва Markdown съдържание по тази схема:</p><pre><code>## Защо [темата] има значение
+(въведение — какъв проблем решава темата)
+## 1. [Първи съвет/секция]
+(обяснение + пример)
+## 2. [Втори съвет/секция]
+(обяснение + пример)
+## Заключение
+(обобщение, без повторение на изброеното)</code></pre></section>
+        <section id="formatting"><h2>3. Правила за форматиране</h2><ul><li><code>##</code> за основни секции, <code>###</code> за подсекции.</li><li>Код в блокове с изричен език: <code>bash</code>, <code>dockerfile</code>, <code>yaml</code>, <code>python</code>.</li><li>Inline код с обратни кавички: <code>code</code>.</li><li>Списъци: <code>-</code> за неподредени и <code>1.</code> за подредени.</li><li><strong>Bold</strong> — пестеливо, само за истински важно.</li><li>Връзки само когато реално добавят стойност.</li><li><code>&gt;</code> за важни бележки и предупреждения.</li></ul></section>
+        <section id="style"><h2>4. Стил на писане</h2><ul><li>Чист български език с минимум англицизми в прозата.</li><li>Професионалната терминология остава на английски: <code>caching</code>, <code>layer</code>, <code>build context</code>.</li><li>Директен, честен и топъл тон без излишни клишета.</li><li>Точността е по-важна от звученето — непровереното се отбелязва ясно.</li><li>При по-добър или по-безопасен подход той се предлага веднага.</li></ul></section>
+        <section id="testing"><h2>5. Тестване локално</h2><pre><code>npm run dev</code></pre><ul class="check"><li>Провери конзолата за грешки.</li><li>Изпълни <code>npm run build</code> и провери дали build-ът приключва чисто.</li><li>Провери всички връзки с link checker.</li><li>Провери schema-та с Rich Results Test, ако има structured data.</li></ul></section>
+        <section id="deploy"><h2>6. Deploy</h2><pre><code>git add .
+git commit -m "Добавяне на статия за ..."
+git push</code></pre></section>
+        <section id="navigation"><h2>Навигация и layout</h2><table><thead><tr><th>Какво</th><th>Къде</th></tr></thead><tbody><tr><td>Менюта (header)</td><td><code>src/data/navigation.ts</code> → <code>mainNav</code></td></tr><tr><td>Footer линкове</td><td><code>src/data/navigation.ts</code> → <code>footerLinks</code></td></tr><tr><td>Header компонент</td><td><code>src/components/Header.astro</code></td></tr><tr><td>Footer компонент</td><td><code>src/components/Footer.astro</code></td></tr><tr><td>Base layout</td><td><code>src/layouts/BaseLayout.astro</code></td></tr><tr><td>Глобални стилове</td><td><code>src/styles/global.css</code></td></tr><tr><td>Tailwind конфиг</td><td><code>tailwind.config.mjs</code></td></tr></tbody></table></section>
+        <section id="content"><h2>Съдържание, страници и компоненти</h2><p>Статиите се намират в <code>src/content/posts/*.md</code>, а уроците — в <code>src/content/tutorials/*.md</code>. Schema-та за колекциите е в <code>src/content.config.ts</code>.</p><h3>Основни маршрути</h3><ul><li><code>/</code> — <code>src/pages/index.astro</code></li><li><code>/blog</code> и <code>/blog/&lt;slug&gt;</code></li><li><code>/tutorials</code> и <code>/tutorials/&lt;slug&gt;</code></li><li><code>/linux</code>, <code>/devops</code>, <code>/technologies</code>, <code>/security</code>, <code>/cloud</code>, <code>/tools</code></li><li><code>/404</code> — страница за липсващи адреси</li></ul><h3>Компоненти</h3><p><code>PostCard</code>, <code>TutorialCard</code>, <code>Header</code>, <code>Footer</code>, <code>Badge</code>, <code>SafeImage</code> и <code>CodeCopy</code> се намират в <code>src/components/</code>.</p><h3>Инфраструктура</h3><p>Sitemap-ът се генерира от <code>@astrojs/sitemap</code>. Допълнителните файлове са <code>public/robots.txt</code>, <code>public/llms.txt</code> и <code>public/favicon.svg</code>. Hero images се съхраняват в <code>public/images/&lt;category&gt;/</code>.</p></section>
+        <section id="workflow"><h2>Ежедневен workflow</h2><pre><code># 1. Пишеш нова статия
+nano src/content/posts/моята-статия.md
+# 2. Тестваш локално
+npm run dev
+# 3. Проверяваш build
+npm run build
+# 4. Пушваш
+git add .
+git commit -m "Add article: заглавие"
+git push</code></pre><ol><li>Изчакай 1–2 минути и провери GitHub Actions.</li><li>Отвори <code>https://linuxdev.fedia.eu/blog/моята-статия</code>.</li></ol></section>
+        <section id="sync"><h2>Синхронизиране</h2><p>Преди работа на домашния компютър или работния лаптоп отвори терминала в папката на проекта и изпълни:</p><pre><code>git pull</code></pre><p>Така ще свалиш промените, качени от другото устройство, и работната папка ще бъде синхронизирана.</p></section>
+      </article>
+      <footer>LinuxDev Portal · Reference / Checklist<br><a class="top" href="#top">↑ Към началото</a></footer>
+    </main>
+  </div>
+</body>
+</html>

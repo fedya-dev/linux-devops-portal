@@ -4,12 +4,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PostCard from '../components/PostCard.astro';
+import TutorialCard from '../components/TutorialCard.astro';
 import { categories } from '../data/categories';
 
-const allPosts = (await getCollection('posts'))
+// Вземаме последните 3 статии
+const recentPosts = (await getCollection('posts'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+  .slice(0, 3)
+  .map((p) => ({
+    type: 'post' as const,
+    id: p.id,
+    data: p.data,
+  }));
+
+// Вземаме последните 3 урока
+const recentTutorials = (await getCollection('tutorials'))
+  .filter((t) => !t.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3)
+  .map((t) => ({
+    type: 'tutorial' as const,
+    id: t.id,
+    data: t.data,
+  }));
+
+// Смесваме и сортираме по дата, вземаме първите 6
+const recentItems = [...recentPosts, ...recentTutorials]
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 6);
 
 const features = [
   {
@@ -123,32 +146,45 @@ const features = [
     </div>
   </section>
 
-
-
   <section class="py-20 md:py-28">
     <div class="container-custom">
       <div class="text-center mb-14">
         <h2 class="section-title">Последни материали</h2>
-        <p class="section-subtitle mx-auto">Свежи technical deep-dives</p>
+        <p class="section-subtitle mx-auto">Свежи статии и уроци</p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {allPosts.map((post) => (
-          <PostCard
-            title={post.data.title}
-            description={post.data.description}
-            pubDate={post.data.pubDate}
-            category={post.data.category}
-            tags={post.data.tags}
-            readTime={post.data.readTime}
-            featured={post.data.featured}
-            heroImage={post.data.heroImage}
-            heroImageAlt={post.data.heroImageAlt}
-            href={`/blog/${post.id}`}
-          />
+        {recentItems.map((item) => (
+          item.type === 'post' ? (
+            <PostCard
+              title={item.data.title}
+              description={item.data.description}
+              pubDate={item.data.pubDate}
+              category={item.data.category}
+              tags={item.data.tags}
+              readTime={item.data.readTime}
+              featured={item.data.featured}
+              heroImage={item.data.heroImage}
+              heroImageAlt={item.data.heroImageAlt}
+              href={`/blog/${item.id}`}
+            />
+          ) : (
+            <TutorialCard
+              title={item.data.title}
+              description={item.data.description}
+              category={item.data.category}
+              level={item.data.level}
+              duration={item.data.duration}
+              tags={item.data.tags}
+			  heroImage={item.data.heroImage}
+			  heroImageAlt={item.data.heroImageAlt}
+              href={`/tutorials/${item.id}`}
+            />
+          )
         ))}
       </div>
-      <div class="text-center mt-10">
+      <div class="text-center mt-10 flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/blog" class="btn-secondary">Виж всички статии</a>
+        <a href="/tutorials" class="btn-secondary">Виж всички уроци</a>
       </div>
     </div>
   </section>

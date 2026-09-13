@@ -2,10 +2,10 @@
 import { footerLinks } from '../data/navigation';
 const currentYear = new Date().getFullYear();
 ---
+
 <footer class="border-t border-surface-800 bg-surface-950/80 mt-auto">
   <div class="container-custom py-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
-      <!-- Brand -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
       <div class="lg:col-span-2">
         <a href="/" class="flex items-center gap-3 mb-5">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-lg shadow-brand-500/20">
@@ -24,33 +24,6 @@ const currentYear = new Date().getFullYear();
         </p>
       </div>
 
-      <!-- Train Brakes (в средата) -->
-      <div class="flex flex-col items-start">
-        <a 
-          href="https://trainbrakes.com/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="group flex items-center gap-3 mb-4"
-        >
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform">
-            <!-- Train icon -->
-            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2c-4 0-8 .5-8 4v9.5A3.5 3.5 0 0 0 7.5 19H9v1.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V19h2v1.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V19h1.5a3.5 3.5 0 0 0 3.5-3.5V6c0-3.5-4-4-8-4zM7.5 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 8h8v4H8V8z"/>
-            </svg>
-          </div>
-          <div>
-            <span class="font-display font-bold text-white text-lg group-hover:text-brand-400 transition-colors">
-              Train Brakes
-            </span>
-            <span class="block text-xs text-surface-500 -mt-0.5">Partner Project</span>
-          </div>
-        </a>
-        <p class="text-surface-400 text-sm leading-relaxed max-w-[180px]">
-          Специализирани решения за спирачни системи на влакове.
-        </p>
-      </div>
-
-      <!-- Footer links -->
       {Object.entries(footerLinks).map(([title, links]) => (
         <div>
           <h4 class="font-semibold text-white mb-4 text-sm tracking-wide uppercase">{title}</h4>

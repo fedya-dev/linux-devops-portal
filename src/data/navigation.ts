@@ -5,6 +5,7 @@ export const mainNav = [
   { label: 'Technologies', href: '/technologies' },
   { label: 'Блог', href: '/blog' },
   { label: 'Уроци', href: '/tutorials' },
+  { label: 'Скриптове', href: '/scripts' },
   { label: 'Tools', href: '/tools' },
 ] as const;
 

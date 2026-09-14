@@ -37,4 +37,26 @@ const tutorials = defineCollection({
   }),
 });
 
-export const collections = { posts, tutorials };
+const scripts = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/scripts' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    category: z.enum(['Automation', 'Backup', 'Monitoring', 'Networking', 'Security', 'DevOps']),
+    tags: z.array(z.string()).default([]),
+    author: z.string().default('LinuxDev Team'),
+    version: z.string().default('1.0.0'),
+    language: z.enum(['bash', 'python', 'ansible', 'go', 'other']).default('bash'),
+    dependencies: z.array(z.string()).default([]),
+    usage: z.string().optional(),
+    repository: z.string().optional(),
+    draft: z.boolean().default(false),
+    featured: z.boolean().default(false),
+    heroImage: z.string().optional(),
+    heroImageAlt: z.string().optional(),
+  }),
+});
+
+export const collections = { posts, tutorials, scripts };

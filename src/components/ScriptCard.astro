@@ -1,0 +1,75 @@
+---
+import Badge from './ui/Badge.astro';
+import { formatDate } from '../lib/utils';
+
+interface Props {
+  title: string;
+  description: string;
+  category: string;
+  version: string;
+  language: string;
+  tags?: string[];
+  pubDate: Date;
+  featured?: boolean;
+  href: string;
+}
+
+const { title, description, category, version, language, tags = [], pubDate, featured, href } = Astro.props;
+
+const languageIcons: Record<string, string> = {
+  bash: '🐚',
+  python: '🐍',
+  ansible: '⚙️',
+  go: '🔷',
+  other: '📄',
+};
+---
+
+<article class="card group flex flex-col h-full">
+  <div class="flex-1">
+    <div class="flex flex-wrap items-center gap-2 mb-3">
+      <Badge variant="category">{category}</Badge>
+      {featured && (
+        <span class="text-[10px] uppercase tracking-wider text-orange-400 font-semibold">⭐ Препоръчан</span>
+      )}
+    </div>
+
+    <a href={href}>
+      <h3 class="text-lg font-semibold text-white group-hover:text-brand-400 transition-colors mb-2 leading-snug">
+        {title}
+      </h3>
+    </a>
+
+    <p class="text-sm text-surface-400 mb-4 line-clamp-2 leading-relaxed">
+      {description}
+    </p>
+
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-1.5 mb-4">
+        {tags.slice(0, 3).map((tag) => (
+          <span class="text-[11px] text-surface-500 bg-surface-800/80 px-2 py-0.5 rounded">{tag}</span>
+        ))}
+        {tags.length > 3 && (
+          <span class="text-[11px] text-surface-600">+{tags.length - 3}</span>
+        )}
+      </div>
+    )}
+  </div>
+
+  <div class="mt-5 pt-4 border-t border-surface-800/60 flex items-center justify-between text-xs text-surface-500">
+    <div class="flex items-center gap-3">
+      <span>v{version}</span>
+      <span>{formatDate(pubDate)}</span>
+    </div>
+    <span class="text-base">{languageIcons[language] || '📄'}</span>
+  </div>
+
+  <div class="mt-3">
+    <a href={href} class="inline-flex items-center gap-1 text-sm text-brand-400 group-hover:gap-2 transition-all">
+      Преглед
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+      </svg>
+    </a>
+  </div>
+</article>

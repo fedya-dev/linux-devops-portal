@@ -1,0 +1,138 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Badge from '../../components/ui/Badge.astro';
+import { formatDate } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const scripts = await getCollection('scripts');
+  return scripts.map((script) => ({
+    params: { slug: script.id },
+    props: { script },
+  }));
+}
+
+const { script } = Astro.props;
+const { Content } = await render(script);
+
+const languageIcons: Record<string, string> = {
+  bash: '🐚',
+  python: '🐍',
+  ansible: '⚙️',
+  go: '🔷',
+  other: '📄',
+};
+---
+
+<BaseLayout
+  title={`${script.data.title} — Скриптове`}
+  description={script.data.description}
+  pageType="article"
+  article={{
+    headline: script.data.title,
+    datePublished: script.data.pubDate.toISOString(),
+    author: script.data.author,
+  }}
+>
+  <Header slot="header" />
+
+  <article class="pt-12 pb-24">
+    <div class="container-custom max-w-3xl">
+      <a href="/scripts" class="inline-flex items-center gap-2 text-brand-400 hover:text-brand-300 transition-colors text-sm mb-8">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Назад към каталога
+      </a>
+
+      <header class="mb-10">
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+          <Badge variant="category">{script.data.category}</Badge>
+          {script.data.featured && (
+            <span class="text-[10px] uppercase tracking-wider text-orange-400 font-semibold">⭐ Препоръчан</span>
+          )}
+          <span class="text-sm text-surface-500">v{script.data.version}</span>
+          <span class="text-surface-600">•</span>
+          <span class="text-sm text-surface-500">{formatDate(script.data.pubDate)}</span>
+          <span class="text-surface-600">•</span>
+          <span class="text-sm text-surface-500">{languageIcons[script.data.language]} {script.data.language}</span>
+        </div>
+
+        <h1 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+          {script.data.title}
+        </h1>
+
+        <p class="text-lg text-surface-300 leading-relaxed mb-8">
+          {script.data.description}
+        </p>
+
+        {script.data.dependencies.length > 0 && (
+          <div class="bg-surface-900/60 border border-surface-700/50 rounded-xl p-5 mb-6">
+            <h3 class="text-sm font-semibold text-white mb-2">Зависимости</h3>
+            <div class="flex flex-wrap gap-2">
+              {script.data.dependencies.map((dep) => (
+                <code class="text-xs text-brand-300 bg-surface-800 px-2 py-1 rounded">{dep}</code>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {script.data.usage && (
+          <div class="bg-surface-900/60 border border-surface-700/50 rounded-xl p-5 mb-6">
+            <h3 class="text-sm font-semibold text-white mb-2">Употреба</h3>
+            <code class="text-sm text-brand-300 break-all">{script.data.usage}</code>
+          </div>
+        )}
+
+        {script.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-2">
+            {script.data.tags.map((tag) => (
+              <span class="text-xs text-surface-400 bg-surface-800 px-2.5 py-1 rounded-md">{tag}</span>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <div class="prose prose-invert prose-lg max-w-none
+        prose-headings:font-display prose-headings:text-white
+        prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
+        prose-h3:text-xl prose-h3:mt-8
+        prose-p:text-surface-300 prose-p:leading-relaxed
+        prose-a:text-brand-400 prose-a:no-underline hover:prose-a:underline
+        prose-strong:text-white
+        prose-pre:bg-surface-900 prose-pre:border prose-pre:border-surface-700 prose-pre:rounded-xl
+        prose-blockquote:border-brand-500 prose-blockquote:text-surface-400
+        prose-table:text-sm
+        prose-th:text-surface-200 prose-td:text-surface-400
+        prose-li:text-surface-300
+        prose-img:rounded-xl prose-img:border prose-img:border-surface-700
+      ">
+        <Content />
+      </div>
+
+      {script.data.repository && (
+        <div class="mt-12 p-6 rounded-xl border border-surface-800 bg-surface-900/50">
+          <a href={script.data.repository} target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-brand-400 hover:text-brand-300 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            Виж в GitHub
+          </a>
+        </div>
+      )}
+
+      <div class="mt-12 pt-8 border-t border-surface-800">
+        <a href="/scripts" class="inline-flex items-center gap-2 text-brand-400 hover:text-brand-300 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Всички скриптове
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>

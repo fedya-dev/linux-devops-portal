@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ScriptCard from '../../components/ScriptCard.astro';
+
+const allScripts = (await getCollection('scripts'))
+  .filter((s) => !s.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Скриптове — LinuxDev Portal" description="Каталог с полезни скриптове за автоматизация и уеб разработка.">
+  <Header slot="header" />
+
+  <section class="pt-16 pb-12 relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg opacity-30"></div>
+    <div class="container-custom relative">
+      <div class="max-w-3xl">
+        <div class="badge mb-4">Скриптове</div>
+        <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+          Каталог със скриптове
+        </h1>
+        <p class="text-lg text-surface-300 leading-relaxed">
+          Открийте полезни скриптове за автоматизация и уеб разработка.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 pb-24">
+    <div class="container-custom">
+      {allScripts.length === 0 ? (
+        <p class="text-surface-400 text-center py-20">Скоро ще има нови скриптове...</p>
+      ) : (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allScripts.map((script) => (
+            <ScriptCard
+              title={script.data.title}
+              description={script.data.description}
+              category={script.data.category}
+              version={script.data.version}
+              language={script.data.language}
+              tags={script.data.tags}
+              pubDate={script.data.pubDate}
+              featured={script.data.featured}
+              href={`/scripts/${script.id}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

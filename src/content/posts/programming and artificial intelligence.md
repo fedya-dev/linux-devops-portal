@@ -7,7 +7,7 @@ tags: ["AI", "Software Engineering", "DevOps", "Future of Work"]
 author: "Федя Серафиев"
 featured: false
 readTime: "8 мин."
-heroImage: "/images/devops/programming and artificial intelligence.webp"
+heroImage: "/images/devops/programming-and-artificial-intelligence.webp"
 heroImageAlt: "Илюстрация на програмиране и изкуствен интелект"
 ---
 

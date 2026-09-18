@@ -12,6 +12,7 @@ const isActive = (href: string) => {
 <header class="sticky top-0 z-50 border-b border-surface-800/80 bg-surface-950/80 backdrop-blur-xl">
   <div class="container-custom">
     <div class="flex items-center justify-between h-16">
+
       <a href="/" class="flex items-center gap-3 group">
         <div class="relative">
           <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-lg shadow-brand-500/30 group-hover:shadow-brand-400/50 transition-shadow">
@@ -20,17 +21,21 @@ const isActive = (href: string) => {
             </svg>
           </div>
         </div>
+
         <div class="flex flex-col">
           <span class="font-display font-bold text-white text-lg leading-tight tracking-tight">
             Linux<span class="text-brand-400">Dev</span>
           </span>
-          <span class="text-[10px] uppercase tracking-widest text-surface-500 font-medium -mt-0.5">Portal</span>
+          <span class="text-[10px] uppercase tracking-widest text-surface-500 font-medium -mt-0.5">
+            Portal
+          </span>
         </div>
       </a>
 
       <nav class="hidden lg:flex items-center gap-1">
         {mainNav.map((item) => {
           const active = isActive(item.href);
+
           return (
             <a
               href={item.href}
@@ -42,32 +47,69 @@ const isActive = (href: string) => {
               ]}
             >
               {item.label}
+
               {active && (
                 <span class="absolute bottom-1 left-3 right-3 h-0.5 bg-brand-500 rounded-full"></span>
               )}
             </a>
           );
         })}
+
+        <!-- Търсене -->
+        <a
+          href="/search"
+          class="hidden lg:flex items-center justify-center w-9 h-9 ml-2 rounded-lg text-surface-300 hover:text-white hover:bg-surface-800/80 transition-colors"
+          aria-label="Търсене"
+          title="Търсене"
+        >
+          <svg
+            class="w-5 h-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m20 20-4-4"></path>
+          </svg>
+        </a>
       </nav>
 
-
-        <button
-          id="mobile-menu-btn"
-          class="lg:hidden p-2 rounded-lg text-surface-300 hover:bg-surface-800 hover:text-white transition-colors"
-          aria-label="Меню"
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden p-2 rounded-lg text-surface-300 hover:bg-surface-800 hover:text-white transition-colors"
+        aria-label="Меню"
+        type="button"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-      </div>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+
     </div>
   </div>
 
-  <div id="mobile-menu" class="hidden lg:hidden border-t border-surface-800 bg-surface-950">
+  <div
+    id="mobile-menu"
+    class="hidden lg:hidden border-t border-surface-800 bg-surface-950"
+  >
     <nav class="container-custom py-4 flex flex-col gap-1">
+
       {mainNav.map((item) => {
         const active = isActive(item.href);
+
         return (
           <a
             href={item.href}
@@ -82,6 +124,15 @@ const isActive = (href: string) => {
           </a>
         );
       })}
+
+      <!-- Търсене в mobile менюто -->
+      <a
+        href="/search"
+        class="px-4 py-3 text-sm font-medium rounded-lg text-surface-300 hover:text-white hover:bg-surface-800/80 transition-colors"
+      >
+        Търсене
+      </a>
+
     </nav>
   </div>
 </header>
@@ -89,5 +140,8 @@ const isActive = (href: string) => {
 <script>
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
 </script>

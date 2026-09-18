@@ -9,6 +9,7 @@ import { formatDate } from '../../lib/utils';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
+
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
@@ -19,94 +20,155 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BaseLayout 
-  title={`${post.data.title} — LinuxDev Portal`} 
+<BaseLayout
+  title={`${post.data.title} — LinuxDev Portal`}
   description={post.data.description}
   image={post.data.heroImage}
   pageType="article"
   article={{
     headline: post.data.title,
     datePublished: post.data.pubDate.toISOString(),
-    dateModified: post.data.updatedDate?.toISOString() || post.data.pubDate.toISOString(),
+    dateModified:
+      post.data.updatedDate?.toISOString() ||
+      post.data.pubDate.toISOString(),
     author: post.data.author,
     image: post.data.heroImage,
   }}
 >
   <Header slot="header" />
-  
-  <article class="pt-12 pb-24">
+
+  <main class="pt-12 pb-24">
     <div class="container-custom max-w-3xl">
-      <header class="mb-10">
-        <div class="flex flex-wrap items-center gap-3 mb-6">
-          <Badge variant="category">{post.data.category}</Badge>
-          {post.data.featured && (
-            <span class="text-[10px] uppercase tracking-wider text-orange-400 font-semibold">Featured</span>
+
+      <!--
+        Pagefind индексира само съдържанието вътре в този контейнер.
+        Навигация, metadata, image, tags и back-link са извън него
+        или са маркирани с data-pagefind-ignore.
+      -->
+      <div data-pagefind-body>
+
+        <header class="mb-10">
+
+          <!-- Metadata: НЕ се индексира -->
+          <div
+            data-pagefind-ignore
+            class="flex flex-wrap items-center gap-3 mb-6"
+          >
+            <Badge variant="category">{post.data.category}</Badge>
+
+            {post.data.featured && (
+              <span class="text-[10px] uppercase tracking-wider text-orange-400 font-semibold">
+                Featured
+              </span>
+            )}
+
+            <span class="text-sm text-surface-500">
+              {formatDate(post.data.pubDate)}
+            </span>
+
+            {post.data.readTime && (
+              <>
+                <span class="text-surface-600">•</span>
+                <span class="text-sm text-surface-500">
+                  {post.data.readTime}
+                </span>
+              </>
+            )}
+          </div>
+
+          <!-- Заглавието СЕ индексира -->
+          <h1
+            class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6"
+          >
+            {post.data.title}
+          </h1>
+
+          <!-- Описанието СЕ индексира -->
+          <p class="text-lg text-surface-300 leading-relaxed mb-8">
+            {post.data.description}
+          </p>
+
+          <!-- Hero image: НЕ се индексира -->
+          {post.data.heroImage && (
+            <div data-pagefind-ignore class="mb-8">
+              <SafeImage
+                src={post.data.heroImage}
+                alt={post.data.heroImageAlt || post.data.title}
+                class="hero-image"
+                loading="eager"
+              />
+            </div>
           )}
-          <span class="text-sm text-surface-500">{formatDate(post.data.pubDate)}</span>
-          {post.data.readTime && (
-            <>
-              <span class="text-surface-600">•</span>
-              <span class="text-sm text-surface-500">{post.data.readTime}</span>
-            </>
+
+          <!-- Tags: НЕ се индексират -->
+          {post.data.tags.length > 0 && (
+            <div
+              data-pagefind-ignore
+              class="flex flex-wrap gap-2"
+            >
+              {post.data.tags.map((tag) => (
+                <span
+                  class="text-xs text-surface-400 bg-surface-800 px-2.5 py-1 rounded-md"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           )}
+
+        </header>
+
+        <!-- Реалното съдържание на статията СЕ индексира -->
+        <div
+          class="prose prose-invert prose-lg max-w-none
+            prose-headings:font-display prose-headings:text-white
+            prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
+            prose-h3:text-xl prose-h3:mt-8
+            prose-p:text-surface-300 prose-p:leading-relaxed
+            prose-a:text-brand-400 prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-white
+
+            prose-pre:bg-surface-900 prose-pre:border
+            prose-pre:border-surface-700 prose-pre:rounded-xl
+
+            prose-blockquote:border-brand-500
+            prose-blockquote:text-surface-400
+
+            prose-table:text-sm
+            prose-th:text-surface-200
+            prose-td:text-surface-400
+            prose-li:text-surface-300
+
+            prose-img:rounded-xl
+            prose-img:border
+            prose-img:border-surface-700
+          "
+        >
+          <Content />
         </div>
-        
-        <h1 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
-          {post.data.title}
-        </h1>
-        
-        <p class="text-lg text-surface-300 leading-relaxed mb-8">
-          {post.data.description}
-        </p>
 
-        {post.data.heroImage && (
-          <div class="mb-8">
-            <SafeImage
-              src={post.data.heroImage}
-              alt={post.data.heroImageAlt || post.data.title}
-              class="hero-image"
-              loading="eager"
-            />
-          </div>
-        )}
-        
-        {post.data.tags.length > 0 && (
-          <div class="flex flex-wrap gap-2">
-            {post.data.tags.map((tag) => (
-              <span class="text-xs text-surface-400 bg-surface-800 px-2.5 py-1 rounded-md">{tag}</span>
-            ))}
-          </div>
-        )}
-      </header>
-
-      <div class="prose prose-invert prose-lg max-w-none
-        prose-headings:font-display prose-headings:text-white
-        prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
-        prose-h3:text-xl prose-h3:mt-8
-        prose-p:text-surface-300 prose-p:leading-relaxed
-        prose-a:text-brand-400 prose-a:no-underline hover:prose-a:underline
-        prose-strong:text-white
-        
-        prose-pre:bg-surface-900 prose-pre:border prose-pre:border-surface-700 prose-pre:rounded-xl
-        prose-blockquote:border-brand-500 prose-blockquote:text-surface-400
-        prose-table:text-sm
-        prose-th:text-surface-200 prose-td:text-surface-400
-        prose-li:text-surface-300
-        prose-img:rounded-xl prose-img:border prose-img:border-surface-700
-      ">
-        <Content />
       </div>
 
+      <!-- Back link: НЕ се индексира, защото е извън Pagefind body -->
       <div class="mt-16 pt-8 border-t border-surface-800">
-        <a href="/blog" class="inline-flex items-center gap-2 text-brand-400 hover:text-brand-300 transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-2 text-brand-400 hover:text-brand-300 transition-colors"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M15 19l-7-7 7-7" />
           </svg>
           Назад към блога
         </a>
       </div>
+
     </div>
-  </article>
+  </main>
 
   <Footer slot="footer" />
 </BaseLayout>

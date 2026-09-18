@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Search from 'astro-pagefind/components/Search.astro';
+---
+
+<BaseLayout
+  title="Търсене — LinuxDev Portal"
+  description="Търсене в LinuxDev Portal — Linux, DevOps, технологии, уроци и технически статии."
+>
+  <Header slot="header" />
+
+  <main class="py-16 md:py-24">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+
+        <div class="mb-10">
+          <span class="badge mb-4 inline-flex">
+            LinuxDev Portal
+          </span>
+
+          <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+            Търсене
+          </h1>
+
+          <p class="text-lg text-surface-400">
+            Търси в статиите, уроците и техническите материали на портала.
+          </p>
+        </div>
+
+        <div class="pagefind-search-wrapper">
+          <Search
+            instance="linuxdev"
+            className="pagefind-ui"
+            searchboxOptions={{
+              placeholder: 'Търси в LinuxDev...'
+            }}
+          />
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer slot="footer" />
+</BaseLayout>

@@ -9,6 +9,7 @@ import { formatDate } from '../../lib/utils';
 
 export async function getStaticPaths() {
   const tutorials = await getCollection('tutorials');
+
   return tutorials.map((tutorial) => ({
     params: { slug: tutorial.id },
     props: { tutorial },
@@ -18,15 +19,16 @@ export async function getStaticPaths() {
 const { tutorial } = Astro.props;
 const { Content } = await render(tutorial);
 
-const levelColor = tutorial.data.level === 'Advanced'
-  ? 'bg-orange-500/10 text-orange-400 border-orange-500/20'
-  : tutorial.data.level === 'Beginner'
-  ? 'bg-brand-500/10 text-brand-400 border-brand-500/20'
-  : 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20';
+const levelColor =
+  tutorial.data.level === 'Advanced'
+    ? 'bg-orange-500/10 text-orange-400 border-orange-500/20'
+    : tutorial.data.level === 'Beginner'
+    ? 'bg-brand-500/10 text-brand-400 border-brand-500/20'
+    : 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20';
 ---
 
-<BaseLayout 
-  title={`${tutorial.data.title} — LinuxDev Portal`} 
+<BaseLayout
+  title={`${tutorial.data.title} — LinuxDev Portal`}
   description={tutorial.data.description}
   image={tutorial.data.heroImage}
   pageType="article"
@@ -38,80 +40,147 @@ const levelColor = tutorial.data.level === 'Advanced'
   }}
 >
   <Header slot="header" />
-  
-  <article class="pt-12 pb-24">
+
+  <main class="pt-12 pb-24">
     <div class="container-custom max-w-3xl">
-      <header class="mb-10">
-        <div class="flex flex-wrap items-center gap-3 mb-6">
-          <Badge variant="category">{tutorial.data.category}</Badge>
-          <span class={`text-[11px] font-medium px-2.5 py-0.5 rounded-full border ${levelColor}`}>
-            {tutorial.data.level}
-          </span>
-          <span class="text-sm text-surface-500">{tutorial.data.duration}</span>
-          <span class="text-surface-600">•</span>
-          <span class="text-sm text-surface-500">{formatDate(tutorial.data.pubDate)}</span>
+
+      <!--
+        Pagefind индексира само съдържанието вътре в този контейнер.
+        Навигация, metadata, hero image, tags и back-link
+        са изключени от индекса.
+      -->
+      <div data-pagefind-body>
+
+        <header class="mb-10">
+
+          <!-- Metadata: НЕ се индексира -->
+          <div
+            data-pagefind-ignore
+            class="flex flex-wrap items-center gap-3 mb-6"
+          >
+            <Badge variant="category">
+              {tutorial.data.category}
+            </Badge>
+
+            <span
+              class={`text-[11px] font-medium px-2.5 py-0.5 rounded-full border ${levelColor}`}
+            >
+              {tutorial.data.level}
+            </span>
+
+            <span class="text-sm text-surface-500">
+              {tutorial.data.duration}
+            </span>
+
+            <span class="text-surface-600">•</span>
+
+            <span class="text-sm text-surface-500">
+              {formatDate(tutorial.data.pubDate)}
+            </span>
+          </div>
+
+          <!-- Заглавието СЕ индексира -->
+          <h1
+            class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6"
+          >
+            {tutorial.data.title}
+          </h1>
+
+          <!-- Описанието СЕ индексира -->
+          <p class="text-lg text-surface-300 leading-relaxed mb-8">
+            {tutorial.data.description}
+          </p>
+
+          <!-- Hero image: НЕ се индексира -->
+          {tutorial.data.heroImage && (
+            <div data-pagefind-ignore class="mb-8">
+              <SafeImage
+                src={tutorial.data.heroImage}
+                alt={tutorial.data.heroImageAlt || tutorial.data.title}
+                class="hero-image"
+                loading="eager"
+              />
+            </div>
+          )}
+
+          <!--
+            Предварителните изисквания СЕ индексират,
+            защото са реална техническа информация за урока.
+          -->
+          {tutorial.data.prerequisites.length > 0 && (
+            <div class="bg-surface-900/60 border border-surface-700/50 rounded-xl p-5">
+              <h3 class="text-sm font-semibold text-white mb-2">
+                Предварителни изисквания
+              </h3>
+
+              <ul class="space-y-1">
+                {tutorial.data.prerequisites.map((p) => (
+                  <li class="text-sm text-surface-400 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+        </header>
+
+        <!-- Реалното съдържание на урока СЕ индексира -->
+        <div
+          class="prose prose-invert prose-lg max-w-none
+            prose-headings:font-display prose-headings:text-white
+            prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
+            prose-h3:text-xl prose-h3:mt-8
+            prose-p:text-surface-300 prose-p:leading-relaxed
+            prose-a:text-brand-400 prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-white
+
+            prose-pre:bg-surface-900 prose-pre:border
+            prose-pre:border-surface-700 prose-pre:rounded-xl
+
+            prose-blockquote:border-brand-500
+            prose-blockquote:text-surface-400
+
+            prose-li:text-surface-300
+
+            prose-img:rounded-xl
+            prose-img:border
+            prose-img:border-surface-700
+          "
+        >
+          <Content />
         </div>
-        
-        <h1 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
-          {tutorial.data.title}
-        </h1>
-        
-        <p class="text-lg text-surface-300 leading-relaxed mb-8">
-          {tutorial.data.description}
-        </p>
 
-        {tutorial.data.heroImage && (
-          <div class="mb-8">
-            <SafeImage
-              src={tutorial.data.heroImage}
-              alt={tutorial.data.heroImageAlt || tutorial.data.title}
-              class="hero-image"
-              loading="eager"
-            />
-          </div>
-        )}
-
-        {tutorial.data.prerequisites.length > 0 && (
-          <div class="bg-surface-900/60 border border-surface-700/50 rounded-xl p-5">
-            <h3 class="text-sm font-semibold text-white mb-2">Предварителни изисквания</h3>
-            <ul class="space-y-1">
-              {tutorial.data.prerequisites.map((p) => (
-                <li class="text-sm text-surface-400 flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </header>
-
-      <div class="prose prose-invert prose-lg max-w-none
-        prose-headings:font-display prose-headings:text-white
-        prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
-        prose-h3:text-xl prose-h3:mt-8
-        prose-p:text-surface-300 prose-p:leading-relaxed
-        prose-a:text-brand-400 prose-a:no-underline hover:prose-a:underline
-        prose-strong:text-white
-        
-        prose-pre:bg-surface-900 prose-pre:border prose-pre:border-surface-700 prose-pre:rounded-xl
-        prose-blockquote:border-brand-500 prose-blockquote:text-surface-400
-        prose-li:text-surface-300
-        prose-img:rounded-xl prose-img:border prose-img:border-surface-700
-      ">
-        <Content />
       </div>
 
+      <!-- Back link: НЕ се индексира -->
       <div class="mt-16 pt-8 border-t border-surface-800">
-        <a href="/tutorials" class="inline-flex items-center gap-2 text-brand-400 hover:text-brand-300 transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        <a
+          href="/tutorials"
+          class="inline-flex items-center gap-2 text-brand-400 hover:text-brand-300 transition-colors"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
+
           Назад към туториалите
         </a>
       </div>
+
     </div>
-  </article>
+  </main>
 
   <Footer slot="footer" />
 </BaseLayout>

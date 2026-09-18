@@ -2,7 +2,7 @@
 title: "Bash scripting: 10 patterns, които използвам всеки ден"
 description: "Практични Bash patterns от реален production опит. Error handling, argument parsing, logging, trap handlers и още — с примери, които можеш да копираш веднага."
 pubDate: 2026-09-12
-category: "Tools"
+category: "DevOps"
 tags: ["Bash", "Scripting", "Linux", "Automation", "Shell"]
 author: "LinuxDev Team"
 featured: false

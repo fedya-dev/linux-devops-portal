@@ -1,0 +1,30 @@
+---
+import PagefindConfig from 'astro-pagefind/components/PagefindConfig.astro';
+
+export interface Props {
+  instance?: string;
+  className?: string;
+  searchboxOptions?: Record<string, unknown>;
+  configOptions?: Record<string, unknown>;
+}
+
+const {
+  instance,
+  className,
+  searchboxOptions = {},
+  configOptions = {},
+} = Astro.props;
+---
+
+<PagefindConfig {...configOptions} instance={instance} />
+
+<pagefind-searchbox
+  {...searchboxOptions}
+  instance={instance}
+  class={className}
+  data-pf-theme="dark"
+></pagefind-searchbox>
+
+<script>
+  import '@pagefind/component-ui';
+</script>

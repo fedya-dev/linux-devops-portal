@@ -23,7 +23,7 @@ interface Props {
 const { 
   title = 'Linux DevOps Portal — Next-Gen Technical Hub',
   description = 'Специализиран технически портал от следващо поколение за Linux, Technologies & DevOps.',
-  image,
+  image = '/og-default.webp',
   pageType = 'website',
   article,
 } = Astro.props;
@@ -39,7 +39,6 @@ const websiteSchema: WithContext<WebSite> = {
   alternateName: 'Linux DevOps Portal',
   url: siteUrl,
   description: description,
-  image = '/og-default.webp',
   inLanguage: 'bg-BG',
   publisher: {
     '@type': 'Organization',

@@ -1,0 +1,12 @@
+# LinuxDev Portal - robots.txt
+# https://linuxdev.fedia.eu
+
+# Content Signals (EU Directive 2019/790)
+# search: yes | ai-input: no | ai-train: no
+Content-Signal: search=yes, ai-input=no, ai-train=no
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://linuxdev.fedia.eu/sitemap-index.xml

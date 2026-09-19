@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown + Astro + Git – Пълен наръчник</title>
+	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛑%3C/text%3E%3C/svg%3E">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            color: #ff5d00;
+            border-bottom: 3px solid #ff5d00;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #ff5d00;
+            margin-top: 40px;
+            border-left: 4px solid #ff5d00;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #333;
+            margin-top: 30px;
+        }
+        .section {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+        .tip {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .danger {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #ff5d00;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        ul, ol {
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .example {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .result {
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .code-with-result {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .code-box {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .code-box pre {
+            margin: 0;
+            background: transparent;
+        }
+        .result-box {
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .template-box {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .template-box pre {
+            margin: 0;
+            background: transparent;
+        }
+        .template-title {
+            background: #ff5d00;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px 5px 0 0;
+            font-weight: bold;
+            margin: 20px 0 0 0;
+        }
+        .command-box {
+            background: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+        .command-desc {
+            color: #b0bec5;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        a {
+            color: #ff5d00;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .code-with-result {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>📘 Markdown + Astro + Git – Пълен наръчник</h1>
+    <p>Всичко полезно за работа с Markdown, Astro и Git. Запази тази страница като референция!</p>
+
+    <div class="section">
+        <h2>1. Шаблони за YAML Front Matter (различни сайтове)</h2>
+        <p>Всеки сайт има различни полета. Избери шаблона, който отговаря на твоя проект.</p>
+
+        <div class="template-title">🛠️ DevOps / Технически блог</div>
+        <div class="template-box">
+            <pre><code>
+---
+title: ''
+description: >-
+pubDate: 2026-09-12T00:00:00.000Z
+category: DevOps
+tags:
+author: LinuxDev Team
+featured: false
+readTime: 10 мин
+heroImage: /images/tools/test.webp
+heroImageAlt: Bash scripting patterns
+draft: false
+---
+</code></pre>
+        </div>
+
+        <div class="template-title">🏥 Здраве & Красота</div>
+        <div class="template-box">
+            <pre><code>
+---
+title: ""
+pubDate: 2026-09-19T16:15:00.000Z
+description: ""
+author: "Екип Здраве & Красота"
+category: "Митове и факти"
+tags: []
+verdict: ""
+heroImage: "/images/test.jpg"
+heroImageAlt: ""
+featured: false
+draft: false
+---
+</code></pre>
+        </div>
+
+        <div class="template-title">🚗 TrainBrakes / Спирачки</div>
+        <div class="template-box">
+            <pre><code>
+---
+title: 
+description: >-
+pubDate: 2026-09-18T10:15:00.000Z
+author: Федя Серафиев
+category: Спирачки
+tags:
+lang: bg
+slug: 
+heroImage: /images/spirachna-masa.webp
+draft: false
+featured: false
+heroImageAlt: ''
+---
+</code></pre>
+        </div>
+
+        <div class="tip">
+            <strong>Съвет:</strong> Копирай шаблона в отделен .txt файл и го ползвай като template, когато създаваш нова статия.
+        </div>
+
+        <h3>Общи полета и какво означават</h3>
+        <table>
+            <tr>
+                <th>Поле</th>
+                <th>Описание</th>
+                <th>Пример</th>
+            </tr>
+            <tr>
+                <td><code>title</code></td>
+                <td>Заглавие на страницата (за SEO)</td>
+                <td><code>"При кашлица и бронхит"</code></td>
+            </tr>
+            <tr>
+                <td><code>description</code></td>
+                <td>Мета описание за Google (150-160 символа)</td>
+                <td><code>"Стара рецепта с мед..."</code></td>
+            </tr>
+            <tr>
+                <td><code>pubDate</code></td>
+                <td>Дата на публикуване</td>
+                <td><code>2026-09-19</code> или <code>2026-09-13T19:00:00</code></td>
+            </tr>
+            <tr>
+                <td><code>author</code></td>
+                <td>Автор на статията</td>
+                <td><code>"Федя Серафиев"</code></td>
+            </tr>
+            <tr>
+                <td><code>category / categories</code></td>
+                <td>Категория (една или масив)</td>
+                <td><code>"DevOps"</code> или <code>["Здраве"]</code></td>
+            </tr>
+            <tr>
+                <td><code>tags</code></td>
+                <td>Тагове за категоризация</td>
+                <td><code>["кашлица", "бронхит"]</code></td>
+            </tr>
+            <tr>
+                <td><code>heroImage</code></td>
+                <td>Път до главната снимка</td>
+                <td><code>"/images/devops/123.webp"</code></td>
+            </tr>
+            <tr>
+                <td><code>draft</code></td>
+                <td>Чернова (true/false)</td>
+                <td><code>false</code></td>
+            </tr>
+            <tr>
+                <td><code>lang</code></td>
+                <td>Език на съдържанието</td>
+                <td><code>"bg"</code></td>
+            </tr>
+            <tr>
+                <td><code>slug</code></td>
+                <td>URL slug (ако се ползва)</td>
+                <td><code>"pri-kashlitsa-i-bronhit"</code></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>2. Git команди за работа със сайтове</h2>
+
+        <h3>Основни команди</h3>
+        <div class="command-box">
+            git add .
+            <div class="command-desc">Добавя всички промени за commit</div>
+        </div>
+
+        <div class="command-box">
+            git commit -m "Perf: Optimize hero image size and add font-display swap"
+            <div class="command-desc">Commit с описание на промените</div>
+        </div>
+
+        <div class="command-box">
+            git push
+            <div class="command-desc">Качва промените в remote репото</div>
+        </div>
+
+        <h3>Празен commit (за trigger на build/deploy)</h3>
+        <div class="command-box">
+            git commit --allow-empty -m "Empty commit"
+            <div class="command-desc">Създава commit без реални промени</div>
+        </div>
+
+        <div class="command-box">
+            git push
+            <div class="command-desc">Качва празния commit</div>
+        </div>
+        <div class="tip">
+            <strong>Кога се ползва:</strong> Когато искаш да trigger-неш build/deploy без да си променял файлове (напр. след промяна в CI/CD настройките).
+        </div>
+
+        <h3>Примерен workflow</h3>
+        <div class="example">
+            <pre><code># 1. Добавяш промените
+git add .
+
+# 2. Правиш commit с ясно описание
+git commit -m "Perf: Optimize hero image size and add font-display swap"
+
+# 3. Качваш в GitHub/GitLab
+git push</code></pre>
+        </div>
+
+        <div class="tip">
+            <strong>Conventional Commits:</strong> Използвай префикси като <code>Perf:</code>, <code>Feat:</code>, <code>Fix:</code>, <code>Docs:</code> за по-ясна история.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. Astro / npm команди</h2>
+
+        <div class="command-box">
+            npm run dev
+            <div class="command-desc">Стартира локален сървър за разработка (http://localhost:4321)</div>
+        </div>
+
+        <div class="command-box">
+            npm run build
+            <div class="command-desc">Изгражда сайта за продакшън в папка dist</div>
+        </div>
+
+        <div class="command-box">
+            npm run preview
+            <div class="command-desc">Преглед на production build локално</div>
+        </div>
+
+        <div class="command-box">
+            npx astro check
+            <div class="command-desc">Проверка за грешки в кода</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>4. Основен синтаксис на Markdown</h2>
+
+        <h3>Заглавия</h3>
+        <div class="example">
+            <pre><code># Заглавие 1 (H1)
+## Заглавие 2 (H2)
+### Заглавие 3 (H3)
+#### Заглавие 4 (H4)</code></pre>
+        </div>
+
+        <h3>Удебелен и наклонен текст</h3>
+        <div class="example">
+            <pre><code>**Удебелен текст**
+*Наклонен текст*
+***Удебелен и наклонен***</code></pre>
+        </div>
+        <div class="result">
+            <strong>Резултат:</strong> <strong>Удебелен текст</strong>, <em>Наклонен текст</em>, <strong><em>Удебелен и наклонен</em></strong>
+        </div>
+
+        <h3>Списъци</h3>
+        <div class="example">
+            <pre><code>## Неномериран списък
+- Първи елемент
+- Втори елемент
+  - Поделемент (2 интервала + тире)
+- Трети елемент
+
+## Номериран списък
+1. Първи
+2. Втори
+3. Трети</code></pre>
+        </div>
+
+        <h3>Връзки и изображения</h3>
+        <div class="example">
+            <pre><code>[Текст на връзката](https://example.com)
+![Алтернативен текст](/path/to/image.jpg)</code></pre>
+        </div>
+
+        <h3>Цитати</h3>
+        <div class="example">
+            <pre><code>> Това е цитат
+> Може да има няколко реда</code></pre>
+        </div>
+        <div class="result">
+            <blockquote>Това е цитат. Може да има няколко реда.</blockquote>
+        </div>
+
+        <h3>Хоризонтална линия (разделител)</h3>
+        <div class="example">
+            <pre><code>Текст преди линията.
+
+---
+
+Текст след линията.</code></pre>
+        </div>
+        <div class="tip">
+            <strong>Важно:</strong> Винаги оставяй празен ред преди и след <code>---</code>. Използвай точно 3 тирета, не повече!
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. HTML в Markdown (за Astro) – Оцветяване</h2>
+        <div class="tip">
+            Astro позволява HTML директно в Markdown файловете. За оцветяване използваш <code>&lt;span style="color: ...;"&gt;</code>.
+        </div>
+
+        <h3>Как се оцветява дума – пълен пример</h3>
+
+        <div class="code-with-result">
+            <div class="code-box">
+                <pre><code>Това е 
+<span style="color: #ff6b6b;">&lt;span style="color: red;"&gt;</span>червена<span style="color: #ff6b6b;">&lt;/span&gt;</span> дума.</code></pre>
+            </div>
+            <div class="result-box">
+                <div>
+                    Това е <span style="color: red; font-weight: bold;">червена</span> дума.
+                </div>
+            </div>
+        </div>
+
+        <h3>Оцветяване с hex код (препоръчително)</h3>
+
+        <div class="code-with-result">
+            <div class="code-box">
+                <pre><code>Това е 
+<span style="color: #ff6b6b;">&lt;span style="color: #d32f2f;"&gt;</span>тъмночервена<span style="color: #ff6b6b;">&lt;/span&gt;</span> дума.</code></pre>
+            </div>
+            <div class="result-box">
+                <div>
+                    Това е <span style="color: #d32f2f; font-weight: bold;">тъмночервена</span> дума.
+                </div>
+            </div>
+        </div>
+
+        <h3>Пълно изречение с оцветяване</h3>
+
+        <div class="code-with-result">
+            <div class="code-box">
+                <pre><code><span style="color: #ff6b6b;">&lt;span style="color: #ff5d00;"&gt;</span>Важно:<span style="color: #ff6b6b;">&lt;/span&gt;</span> Този материал 
+има <span style="color: #ff6b6b;">&lt;span style="color: #d32f2f;"&gt;</span>информационен характер<span style="color: #ff6b6b;">&lt;/span&gt;</span>.</code></pre>
+            </div>
+            <div class="result-box">
+                <div>
+                    <span style="color: #ff5d00; font-weight: bold;">Важно:</span> Този материал има <span style="color: #d32f2f;">информационен характер</span>.
+                </div>
+            </div>
+        </div>
+
+        <h3>Често използвани цветове с код</h3>
+        <table>
+            <tr>
+                <th>Цвят</th>
+                <th>HTML код</th>
+                <th>Пример</th>
+            </tr>
+            <tr>
+                <td>Червено</td>
+                <td><code>&lt;span style="color: #d32f2f;"&gt;текст&lt;/span&gt;</code></td>
+                <td><span style="color: #d32f2f;">■ Червено</span></td>
+            </tr>
+            <tr>
+                <td>Оранжево (Astro)</td>
+                <td><code>&lt;span style="color: #ff5d00;"&gt;текст&lt;/span&gt;</code></td>
+                <td><span style="color: #ff5d00;">■ Оранжево</span></td>
+            </tr>
+            <tr>
+                <td>Зелено</td>
+                <td><code>&lt;span style="color: #2e7d32;"&gt;текст&lt;/span&gt;</code></td>
+                <td><span style="color: #2e7d32;">■ Зелено</span></td>
+            </tr>
+            <tr>
+                <td>Синьо</td>
+                <td><code>&lt;span style="color: #1976d2;"&gt;текст&lt;/span&gt;</code></td>
+                <td><span style="color: #1976d2;">■ Синьо</span></td>
+            </tr>
+            <tr>
+                <td>Сиво</td>
+                <td><code>&lt;span style="color: #757575;"&gt;текст&lt;/span&gt;</code></td>
+                <td><span style="color: #757575;">■ Сиво</span></td>
+            </tr>
+            <tr>
+                <td>Златисто</td>
+                <td><code>&lt;span style="color: #f57f17;"&gt;текст&lt;/span&gt;</code></td>
+                <td><span style="color: #f57f17;">■ Златисто</span></td>
+            </tr>
+        </table>
+
+        <h3>Комбиниране на стилове</h3>
+
+        <div class="code-with-result">
+            <div class="code-box">
+                <pre><code><span style="color: #ff6b6b;">&lt;span style="color: red; font-weight: bold; font-size: 16px;"&gt;</span>
+Червен, удебелен и по-голям
+<span style="color: #ff6b6b;">&lt;/span&gt;</span></code></pre>
+            </div>
+            <div class="result-box">
+                <div>
+                    <span style="color: red; font-weight: bold; font-size: 16px;">Червен, удебелен и по-голям</span>
+                </div>
+            </div>
+        </div>
+
+        <h3>Подчертаване на текст</h3>
+
+        <div class="code-with-result">
+            <div class="code-box">
+                <pre><code>Това е <span style="color: #ff6b6b;">&lt;u&gt;</span>подчертана<span style="color: #ff6b6b;">&lt;/u&gt;</span> дума.
+
+Или: Това е <span style="color: #ff6b6b;">&lt;span style="text-decoration: underline;"&gt;</span>подчертана<span style="color: #ff6b6b;">&lt;/span&gt;</span> дума.</code></pre>
+            </div>
+            <div class="result-box">
+                <div>
+                    Това е <u>подчертана</u> дума.
+                </div>
+            </div>
+        </div>
+
+        <h3>Изображения в Markdown</h3>
+        <div class="example">
+            <pre><code>![LH3 кран – вътрешен вид](/images/kmd2.webp)</code></pre>
+        </div>
+        <div class="result">
+            <strong>Формат:</strong> <code>![Алтернативен текст](път/до/изображението)</code>
+        </div>
+
+        <div class="warning">
+            <strong>Важно за Markdown файловете:</strong> Когато пишеш HTML в .md файл, пиши го директно – не е нужно да ескейпваш <code>&lt;</code> и <code>&gt;</code>. Astro ще го разбере.
+        </div>
+
+        <h3>Как да използваш CSS класове (по-чисто за много оцветявания)</h3>
+
+        <div class="tip">
+            Ако ще оцветяваш често, дефинирай класове в CSS файла на Astro.
+        </div>
+
+        <div class="example">
+            <strong>1. В CSS файла (напр. <code>src/styles/global.css</code>):</strong>
+            <pre><code>.text-danger {
+  color: #d32f2f;
+}
+
+.text-warning {
+  color: #ff9800;
+}
+
+.text-success {
+  color: #2e7d32;
+}
+
+.text-astro {
+  color: #ff5d00;
+}</code></pre>
+        </div>
+
+        <div class="example">
+            <strong>2. В Markdown файла:</strong>
+            <pre><code>Това е <span style="color: #ff6b6b;">&lt;span class="text-danger"&gt;</span>червена<span style="color: #ff6b6b;">&lt;/span&gt;</span> дума.
+
+Това е <span style="color: #ff6b6b;">&lt;span class="text-astro"&gt;</span>оранжева<span style="color: #ff6b6b;">&lt;/span&gt;</span> дума.</code></pre>
+        </div>
+
+        <div class="tip">
+            <strong>Предимство на класовете:</strong> Променяш цвета на едно място в CSS и се обновява навсякъде в сайта.
+        </div>
+
+        <div class="danger">
+            <strong>Внимание:</strong> Не прекалявай с оцветяването! Използвай го само за акценти и важни предупреждения.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. Специални символи и форматиране</h2>
+
+        <h3>Ескейпване на специални символи</h3>
+        <p>Ако искаш да покажеш символ, който Markdown използва за форматиране, сложи <code>\</code> преди него:</p>
+        <div class="example">
+            <pre><code>\*Това не е наклонен текст\*
+
+\# Това не е заглавие
+
+\-\-\- Това не е линия</code></pre>
+        </div>
+        <div class="result">
+            *Това не е наклонен текст* <br>
+            # Това не е заглавие <br>
+            --- Това не е линия
+        </div>
+
+        <h3>Код (inline)</h3>
+        <div class="example">
+            <pre><code>Използвай `<code>npm run dev</code>` за стартиране.</code></pre>
+        </div>
+        <div class="result">
+            Използвай <span class="inline-code">npm run dev</span> за стартиране.
+        </div>
+
+        <h3>Блок с код</h3>
+        <div class="example">
+            <pre><code>```bash
+npm run dev
+```
+
+```javascript
+console.log("Hello, Astro!");
+```
+
+```css
+body {
+  background: #f5f5f5;
+}
+```</code></pre>
+        </div>
+
+        <h3>Таблицы</h3>
+        <div class="example">
+            <pre><code>| Име | Стойност | Описание |
+|-----|----------|----------|
+| Ред 1 | A | Пример |
+| Ред 2 | B | Пример |</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>7. Чести грешки и как да ги избегнеш</h2>
+
+        <div class="danger">
+            <strong>❌ Грешка:</strong> Дълги хоризонтални линии с много тирета<br>
+            <code>-------------------------------------------------------------------</code><br><br>
+            <strong>✅ Правилно:</strong> Използвай точно 3 тирета<br>
+            <code>---</code>
+        </div>
+
+        <div class="danger">
+            <strong>❌ Грешка:</strong> Front matter не завършва с <code>---</code><br>
+            <code>-----------------------------------------</code><br><br>
+            <strong>✅ Правилно:</strong> Винаги 3 тирета в края на YAML блока
+        </div>
+
+        <div class="danger">
+            <strong>❌ Грешка:</strong> Липса на празен ред преди/след <code>---</code><br><br>
+            <strong>✅ Правилно:</strong> Винаги оставяй празен ред от двете страни
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Внимание:</strong> Не прекалявай с HTML и оцветяването! Markdown трябва да остане четим.
+        </div>
+
+        <div class="tip">
+            <strong>💡 Съвет:</strong> Ако нещо не се рендера правилно, провери дали няма скрити интервали или табулации.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>8. Бърза справка – най-често използвани неща</h2>
+
+        <h3>За ежедневна работа</h3>
+        <ul>
+            <li><strong>Заглавия:</strong> <code>#</code>, <code>##</code>, <code>###</code></li>
+            <li><strong>Удебелен:</strong> <code>**текст**</code></li>
+            <li><strong>Наклонен:</strong> <code>*текст*</code></li>
+            <li><strong>Списъци:</strong> <code>-</code> или <code>1.</code></li>
+            <li><strong>Връзки:</strong> <code>[текст](url)</code></li>
+            <li><strong>Изображения:</strong> <code>![alt](/path/to/image.webp)</code></li>
+            <li><strong>Разделител:</strong> <code>---</code> (с празни редове около!)</li>
+            <li><strong>Оцветяване:</strong> <code>&lt;span style="color: red;"&gt;текст&lt;/span&gt;</code></li>
+        </ul>
+
+        <h2> ✍️ Git workflow</h2>
+        <ul>
+            <li><code>git add .</code> – добавя промените</li>
+            <li><code>git commit -m "Описание"</code> – commit</li>
+            <li><code>git push</code> – качва в remote</li>
+			<li><code><strong><span style="color: red;">gp "Описание"</span></strong></code> – Прави горните три</li>
+			<li><code>git commit --allow-empty -m "Empty commit"</code> – Създава commit без реални промени</li>
+        </ul>
+		
+		
+		<h2> 🛠️ Основни команди </h2>
+		<ul>
+            <li><code><strong><span style="color: red;">npm run dev</span></strong></code> – Стартира локален сървър за разработка (http://localhost:4321)</li>
+			<li><code>npm run build</code> –  Изгражда сайта за продакшън в папка `dist/`</li>
+			<li><code>rm -rf .astro</code> – Изтрива перманентно скритата папка за кеш</li>
+		</ul>	
+        <h3>За SEO и метаданни</h3>
+        <ul>
+            <li><code>title</code> – макс. 60 символа</li>
+            <li><code>description</code> – 150-160 символа</li>
+            <li><code>tags</code> – 5-8 тага на статия</li>
+            <li><code>heroImage</code> – оптимизиран WebP формат</li>
+        </ul>
+
+        <h3>Размери на изображения</h3>
+        <ul>
+            <li><strong>1920 × 1080 px</strong> — 16:9 (TrainBrakes и други)</li>
+            <li>Винаги оптимизирай за web (WebP формат)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🔗 Полезни ресурси</h2>
+        <ul>
+            <li><a href="https://docs.astro.build/" target="_blank">Официална документация на Astro</a></li>
+            <li><a href="https://www.markdownguide.org/" target="_blank">Markdown Guide (пълен наръчник)</a></li>
+            <li><a href="https://git-scm.com/doc" target="_blank">Git документация</a></li>
+            <li><a href="https://www.webfx.com/tools/emoji-cheat-sheet/" target="_blank">Emoji Cheat Sheet</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <p style="text-align: center; color: #757575; margin-top: 40px;">
+            <em>Създадено за бърза справка при работа с Astro, Markdown и Git. <br>Запази тази страница като bookmark! 📌</em>
+        </p>
+    </div>
+</body>
+</html>

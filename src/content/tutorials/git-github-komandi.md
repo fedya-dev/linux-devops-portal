@@ -1,16 +1,24 @@
 ---
-title: "Git и GitHub: Пълен наръчник с команди"
-description: "Изчерпателен списък с най-важните Git команди — от инициализация на repository до branching, merge, rebase и работа с remote."
-pubDate: 2026-09-16
-category: "Tools"
-level: "Intermediate"
-duration: "15 min"
-tags: ["git", "github", "version-control", "cli", "devops"]
-author: "LinuxDev Team"
+title: 'Git и GitHub: Пълен наръчник с команди'
+description: >-
+  Изчерпателен списък с най-важните Git команди — от инициализация на repository
+  до branching, merge, rebase и работа с remote.
+pubDate: 2026-09-16T00:00:00.000Z
+category: Tools
+level: Intermediate
+duration: 15 min
+tags:
+  - git
+  - github
+  - version-control
+  - cli
+  - devops
+author: LinuxDev Team
 featured: false
-readTime: "15 min"
-heroImage: "/images/git-github-komandi.webp"
-heroImageAlt: "Git и GitHub терминал команди"
+readTime: 15 min
+heroImage: /images/git-github-komandi.webp
+heroImageAlt: Git и GitHub терминал команди
+draft: false
 ---
 
 # Git и GitHub: Пълен наръчник с команди

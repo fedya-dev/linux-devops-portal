@@ -1,18 +1,26 @@
 ---
-title: "Docker за начинаещи: От нула до работещ контейнер"
-description: "Пълен наръчник за Docker от абсолютната нула. Какво е контейнер, защо съществува, как се различава от виртуална машина и как да пуснеш първия си работещ контейнер стъпка по стъпка."
-pubDate: 2026-09-11
-category: "DevOps"
-level: "Beginner"
-duration: "40 мин"
-tags: ["Docker", "Containers", "DevOps", "Linux"]
+title: 'Docker за начинаещи: От нула до работещ контейнер'
+description: >-
+  Пълен наръчник за Docker от абсолютната нула. Какво е контейнер, защо
+  съществува, как се различава от виртуална машина и как да пуснеш първия си
+  работещ контейнер стъпка по стъпка.
+pubDate: 2026-09-11T00:00:00.000Z
+category: DevOps
+level: Beginner
+duration: 40 мин
+tags:
+  - Docker
+  - Containers
+  - DevOps
+  - Linux
 prerequisites:
-  - "Linux система (Ubuntu 22.04 / Debian 12) с sudo достъп"
-  - "Основни познания по команден ред"
-  - "Разбиране какво е процес и порт"
+  - Linux система (Ubuntu 22.04 / Debian 12) с sudo достъп
+  - Основни познания по команден ред
+  - Разбиране какво е процес и порт
 featured: true
-heroImage: "/images/devops/docker-za-nachinaeshti.webp"
-heroImageAlt: "Docker контейнери на Linux сървър"
+heroImage: /images/devops/docker-za-nachinaeshti.webp
+heroImageAlt: Docker контейнери на Linux сървър
+draft: false
 ---
 
 Ако попаднеш на Docker за пръв път, вероятно си чувал неща като "контейнери", "образ", "Dockerfile", "Kubernetes" и всичко това звучи като отделна вселена. Аз самият прекарах месеци, докато проумея не само **как** се използва Docker, а **защо** съществува и какъв проблем решава.

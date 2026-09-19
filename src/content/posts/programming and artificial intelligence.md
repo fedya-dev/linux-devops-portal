@@ -1,14 +1,21 @@
 ---
-title: "По-добър ли е изкуственият интелект от повечето програмисти?"
-description: "Лични размисли за това как AI променя ролята на разработчиците, къде ни превъзхожда и какво всъщност ни прави незаменими."
-pubDate: 2026-09-18
-category: "DevOps"
-tags: ["AI", "Software Engineering", "DevOps", "Future of Work"]
-author: "Федя Серафиев"
+title: По-добър ли е изкуственият интелект от повечето програмисти?
+description: >-
+  Лични размисли за това как AI променя ролята на разработчиците, къде ни
+  превъзхожда и какво всъщност ни прави незаменими.
+pubDate: 2026-09-18T00:00:00.000Z
+category: DevOps
+tags:
+  - AI
+  - Software Engineering
+  - DevOps
+  - Future of Work
+author: Федя Серафиев
 featured: false
-readTime: "8 мин."
-heroImage: "/images/devops/programming-and-artificial-intelligence.webp"
-heroImageAlt: "Илюстрация на програмиране и изкуствен интелект"
+readTime: 8 мин.
+heroImage: /images/devops/programming-and-artificial-intelligence.webp
+heroImageAlt: Илюстрация на програмиране и изкуствен интелект
+draft: false
 ---
 
 Напоследък все по-често си хващам мислите в една доста провокативна посока: **дали изкуственият интелект вече не е по-добър програмист от голяма част от нас?**

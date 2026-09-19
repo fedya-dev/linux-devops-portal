@@ -1,14 +1,23 @@
 ---
-title: "Kubernetes Network Policies: Zero Trust Networking"
-description: "Имплементация на Zero Trust модел в Kubernetes чрез Network Policies, Calico и Cilium. Практически примери с default-deny, microsegmentation и egress контрол."
-pubDate: 2026-09-05
-category: "DevOps"
-tags: ["Kubernetes", "NetworkPolicy", "Calico", "Cilium", "Security"]
-author: "LinuxDev Team"
+title: 'Kubernetes Network Policies: Zero Trust Networking'
+description: >-
+  Имплементация на Zero Trust модел в Kubernetes чрез Network Policies, Calico и
+  Cilium. Практически примери с default-deny, microsegmentation и egress
+  контрол.
+pubDate: 2026-09-05T00:00:00.000Z
+category: DevOps
+tags:
+  - Kubernetes
+  - NetworkPolicy
+  - Calico
+  - Cilium
+  - Security
+author: LinuxDev Team
 featured: false
-readTime: "10 мин"
-heroImage: "/images/devops/kubernetes-network-policies.webp"
-heroImageAlt: "Kubernetes Network Policies архитектура"
+readTime: 10 мин
+heroImage: /images/devops/kubernetes-network-policies.webp
+heroImageAlt: Kubernetes Network Policies архитектура
+draft: false
 ---
 
 ## Защо default-allow е опасен

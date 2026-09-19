@@ -1,14 +1,22 @@
 ---
-title: "Dockerfile best practices: 15 съвета от production"
-description: "Практически съвети за писане на ефективни Dockerfile образи. Multi-stage builds, caching, сигурност и оптимизация на размера — с реални примери от production среди."
-pubDate: 2026-09-12
-category: "DevOps"
-tags: ["Docker", "Dockerfile", "Best Practices", "DevOps"]
-author: "LinuxDev Team"
+title: 'Dockerfile best practices: 15 съвета от production'
+description: >-
+  Практически съвети за писане на ефективни Dockerfile образи. Multi-stage
+  builds, caching, сигурност и оптимизация на размера — с реални примери от
+  production среди.
+pubDate: 2026-09-12T00:00:00.000Z
+category: DevOps
+tags:
+  - Docker
+  - Dockerfile
+  - Best Practices
+  - DevOps
+author: LinuxDev Team
 featured: false
-readTime: "14 мин"
-heroImage: "/images/devops/dockerfile-best-practices.webp"
-heroImageAlt: "Dockerfile best practices"
+readTime: 14 мин
+heroImage: /images/devops/dockerfile-best-practices.webp
+heroImageAlt: Dockerfile best practices
+draft: false
 ---
 
 Писал съм стотици Dockerfile-ове. Някои са били елегантни — 80 MB образи, които се build-ват за 30 секунди. Други са били катастрофи — 2 GB чудовища, които се build-ват 15 минути и съдържат `node_modules` от три различни проекта.

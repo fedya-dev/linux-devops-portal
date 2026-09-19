@@ -1,15 +1,25 @@
 ---
-title: "Building a Production Kubernetes Cluster from Scratch"
-description: "Step-by-step guide за изграждане на HA Kubernetes клъстер с kubeadm, etcd и HAProxy."
-heroImage: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&q=80"
-heroImageAlt: "Server infrastructure"
-pubDate: 2026-09-01
-category: "DevOps"
-level: "Advanced"
-duration: "45 мин"
-tags: ["Kubernetes", "kubeadm", "HA", "etcd"]
-prerequisites: ["Linux admin basics", "Networking fundamentals", "TLS concepts"]
+title: Building a Production Kubernetes Cluster from Scratch
+description: >-
+  Step-by-step guide за изграждане на HA Kubernetes клъстер с kubeadm, etcd и
+  HAProxy.
+heroImage: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&q=80'
+heroImageAlt: Server infrastructure
+pubDate: 2026-09-01T00:00:00.000Z
+category: DevOps
+level: Advanced
+duration: 45 мин
+tags:
+  - Kubernetes
+  - kubeadm
+  - HA
+  - etcd
+prerequisites:
+  - Linux admin basics
+  - Networking fundamentals
+  - TLS concepts
 featured: true
+draft: false
 ---
 
 ## Цел на туториала

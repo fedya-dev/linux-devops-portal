@@ -1,14 +1,23 @@
 ---
-title: "Превръщане на статичен HTML сайт в Docker контейнер и качване в Docker Hub"
-description: "Подробно ръководство стъпка по стъпка как да контейнеризираме статични HTML файлове с Nginx, да публикуваме изображението в Docker Hub и да го стартираме с Docker Compose."
-pubDate: 2026-09-12
-category: "DevOps"
-tags: ["Docker", "Docker Hub", "Docker Compose", "Nginx", "DevOps"]
-author: "Федя Серафиев"
+title: Превръщане на статичен HTML сайт в Docker контейнер и качване в Docker Hub
+description: >-
+  Подробно ръководство стъпка по стъпка как да контейнеризираме статични HTML
+  файлове с Nginx, да публикуваме изображението в Docker Hub и да го стартираме
+  с Docker Compose.
+pubDate: 2026-09-12T00:00:00.000Z
+category: DevOps
+tags:
+  - Docker
+  - Docker Hub
+  - Docker Compose
+  - Nginx
+  - DevOps
+author: Федя Серафиев
 featured: false
-readTime: "12 мин"
-heroImage: "/images/devops/docker_static_site_guide.webp"
-heroImageAlt: "Контейнеризация на статичен уебсайт с Docker и Nginx"
+readTime: 12 мин
+heroImage: /images/devops/docker_static_site_guide.webp
+heroImageAlt: Контейнеризация на статичен уебсайт с Docker и Nginx
+draft: false
 ---
 
 В съвременната уеб разработка стандартизацията на средата е от ключово значение. Независимо дали разработваме комплексно приложение или просто управляваме статичен сайт, контейнеризацията с Docker ни осигурява надеждност, лесно внедряване (deployment) и пълна независимост от хостинг платформата.

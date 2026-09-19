@@ -1,15 +1,26 @@
 ---
-title: "Проверка на дублирани IP адреси в Proxmox VE"
-description: "Bash скрипт, който сканира VM-та и LXC контейнери в Proxmox VE и открива дублирани IP адреси в мрежите 10.110.110.0/24 и 10.20.20.0/24"
-pubDate: 2026-09-10
-category: "Networking"
-tags: ["proxmox", "bash", "networking", "ip-management", "sysadmin"]
-author: "LinuxDev Team"
-version: "1.0.0"
-language: "bash"
-dependencies: ["qm", "pct"]
-usage: "sudo ./proxmox-ip-check.sh"
+title: Проверка на дублирани IP адреси в Proxmox VE
+description: >-
+  Bash скрипт, който сканира VM-та и LXC контейнери в Proxmox VE и открива
+  дублирани IP адреси в мрежите 10.110.110.0/24 и 10.20.20.0/24
+pubDate: 2026-09-10T00:00:00.000Z
+category: Networking
+tags:
+  - proxmox
+  - bash
+  - networking
+  - ip-management
+  - sysadmin
+author: LinuxDev Team
+version: 1.0.0
+language: bash
+dependencies:
+  - qm
+  - pct
+usage: sudo ./proxmox-ip-check.sh
 featured: true
+draft: false
+heroImageAlt: ''
 ---
 
 # Проверка на използваните IP адреси в Proxmox VE

@@ -1,14 +1,23 @@
 ---
-title: "WSL 2: Вашият мост между Windows 11 и Linux"
-description: "Пълен гайд за инсталация и конфигурация на Windows Subsystem for Linux 2 в Windows 11. Научете как да работите с Linux директно от вашия Windows."
-pubDate: 2026-09-12
-category: "DevOps"
-tags: ["WSL 2", "Windows 11", "Linux", "DevOps", "Development Environment", "Linux Terminal"]
-author: "Федя Серафиев"
+title: 'WSL 2: Вашият мост между Windows 11 и Linux'
+description: >-
+  Пълен гайд за инсталация и конфигурация на Windows Subsystem for Linux 2 в
+  Windows 11. Научете как да работите с Linux директно от вашия Windows.
+pubDate: 2026-09-12T00:00:00.000Z
+category: DevOps
+tags:
+  - WSL 2
+  - Windows 11
+  - Linux
+  - DevOps
+  - Development Environment
+  - Linux Terminal
+author: Федя Серафиев
 featured: true
-readTime: "15 мин"
-heroImage: "/images/devops/wsl2-bridge.webp"
-heroImageAlt: "WSL 2 мост между Windows 11 и Linux"
+readTime: 15 мин
+heroImage: /images/devops/wsl2-bridge.webp
+heroImageAlt: WSL 2 мост между Windows 11 и Linux
+draft: false
 ---
 
 ## Увод

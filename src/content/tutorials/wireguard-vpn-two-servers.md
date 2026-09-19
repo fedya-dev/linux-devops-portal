@@ -1,19 +1,27 @@
 ---
-title: "WireGuard VPN: сигурна връзка между два сървъра"
-description: "Пълен step-by-step guide за настройка на WireGuard tunnel между два Linux сървъра — от инсталация до автоматично стартиране и troubleshooting."
-pubDate: 2026-09-11
-category: "Linux"
-level: "Intermediate"
-duration: "25 мин"
-tags: ["WireGuard", "VPN", "Networking", "Security", "Ubuntu"]
+title: 'WireGuard VPN: сигурна връзка между два сървъра'
+description: >-
+  Пълен step-by-step guide за настройка на WireGuard tunnel между два Linux
+  сървъра — от инсталация до автоматично стартиране и troubleshooting.
+pubDate: 2026-09-11T00:00:00.000Z
+category: Linux
+level: Intermediate
+duration: 25 мин
+tags:
+  - WireGuard
+  - VPN
+  - Networking
+  - Security
+  - Ubuntu
 prerequisites:
-  - "Два Linux сървъра (Ubuntu 22.04 / Debian 12) с root или sudo достъп"
-  - "Публични IP адреси или поне един публично достъпен сървър"
-  - "Основни познания по IP addressing и SSH"
-  - "Отворен UDP порт (по подразбиране 51820) във firewall-а"
+  - Два Linux сървъра (Ubuntu 22.04 / Debian 12) с root или sudo достъп
+  - Публични IP адреси или поне един публично достъпен сървър
+  - Основни познания по IP addressing и SSH
+  - Отворен UDP порт (по подразбиране 51820) във firewall-а
 featured: true
-heroImage: "/images/linux/wireguard-vpn-two-servers.webp"
-heroImageAlt: "WireGuard VPN tunnel между два сървъра"
+heroImage: /images/linux/wireguard-vpn-two-servers.webp
+heroImageAlt: WireGuard VPN tunnel между два сървъра
+draft: false
 ---
 
 ## Какво ще построиш

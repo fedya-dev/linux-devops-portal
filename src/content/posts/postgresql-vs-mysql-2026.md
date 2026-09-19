@@ -1,14 +1,23 @@
 ---
-title: "PostgreSQL vs MySQL: Кой за какво през 2026"
-description: "Обективно сравнение на двете най-популярни open-source релационни бази данни. Кога да избереш PostgreSQL, кога MySQL, и защо отговорът зависи от контекста, не от технологията."
-pubDate: 2026-09-12
-category: "Technologies"
-tags: ["PostgreSQL", "MySQL", "Databases", "SQL", "Comparison"]
-author: "LinuxDev Team"
+title: 'PostgreSQL vs MySQL: Кой за какво през 2026'
+description: >-
+  Обективно сравнение на двете най-популярни open-source релационни бази данни.
+  Кога да избереш PostgreSQL, кога MySQL, и защо отговорът зависи от контекста,
+  не от технологията.
+pubDate: 2026-09-12T00:00:00.000Z
+category: Technologies
+tags:
+  - PostgreSQL
+  - MySQL
+  - Databases
+  - SQL
+  - Comparison
+author: LinuxDev Team
 featured: false
-readTime: "11 мин"
-heroImage: "/images/technologies/postgresql-vs-mysql.webp"
-heroImageAlt: "PostgreSQL и MySQL сравнение"
+readTime: 11 мин
+heroImage: /images/technologies/postgresql-vs-mysql.webp
+heroImageAlt: PostgreSQL и MySQL сравнение
+draft: false
 ---
 
 „PostgreSQL или MySQL?" е един от онези въпроси, на които всеки има мнение и никой няма обективен отговор. Ако попиташ в Reddit, ще получиш 200 отговора, всеки от които защитава любимата си база с почти религиозна страст. Ако попиташ в Stack Overflow, ще получиш 15-годишни отговори, които вече не са верни.

@@ -1,18 +1,27 @@
 ---
-title: "SSH Hardening: 10 стъпки за защитен SSH сървър"
-description: "Пълно ръководство за защита на SSH сървър от нулата. Ключове вместо пароли, Fail2ban, порт промени, 2FA и всичко, което всеки production сървър трябва да има."
-pubDate: 2026-09-13
-category: "Technologies"
-level: "Beginner"
-duration: "30 мин"
-tags: ["SSH", "Security", "Hardening", "Linux", "Ubuntu"]
+title: 'SSH Hardening: 10 стъпки за защитен SSH сървър'
+description: >-
+  Пълно ръководство за защита на SSH сървър от нулата. Ключове вместо пароли,
+  Fail2ban, порт промени, 2FA и всичко, което всеки production сървър трябва да
+  има.
+pubDate: 2026-09-13T00:00:00.000Z
+category: Technologies
+level: Beginner
+duration: 30 мин
+tags:
+  - SSH
+  - Security
+  - Hardening
+  - Linux
+  - Ubuntu
 prerequisites:
-  - "Linux сървър (Ubuntu 22.04 / Debian 12) с root или sudo достъп"
-  - "Работеща SSH връзка към сървъра"
-  - "Локална машина с SSH клиент"
+  - Linux сървър (Ubuntu 22.04 / Debian 12) с root или sudo достъп
+  - Работеща SSH връзка към сървъра
+  - Локална машина с SSH клиент
 featured: true
-heroImage: "/images/technologies/ssh-hardening.webp"
-heroImageAlt: "SSH Hardening стъпки"
+heroImage: /images/technologies/ssh-hardening.webp
+heroImageAlt: SSH Hardening стъпки
+draft: false
 ---
 
 SSH е вратата към твоя сървър. И тази врата е отворена за целия интернет — буквално. Всеки скенер, всеки бот, всеки атакуващ може да я намери за минути, след като сървърът излезе онлайн. Ако е защитена само с парола, ти разчиташ на късмет — че никой няма да познае комбинацията, преди да се умори.

@@ -1,14 +1,21 @@
 ---
-title: "eBPF на практика: Observability без overhead"
-description: "Как да използваме eBPF за deep system observability с минимален performance impact. Практичен guide с bpftrace и BCC."
-heroImage: "/images/linux/ebpf-observability.webp"
-heroImageAlt: "Terminal and code on screen"
-pubDate: 2026-09-10
-category: "Linux"
-tags: ["eBPF", "Observability", "Performance", "bpftrace"]
-author: "LinuxDev Team"
+title: 'eBPF на практика: Observability без overhead'
+description: >-
+  Как да използваме eBPF за deep system observability с минимален performance
+  impact. Практичен guide с bpftrace и BCC.
+heroImage: /images/linux/ebpf-observability.webp
+heroImageAlt: Terminal and code on screen
+pubDate: 2026-09-10T00:00:00.000Z
+category: Linux
+tags:
+  - eBPF
+  - Observability
+  - Performance
+  - bpftrace
+author: LinuxDev Team
 featured: true
-readTime: "12 мин"
+readTime: 12 мин
+draft: false
 ---
 
 # eBPF на практика: Observability без overhead

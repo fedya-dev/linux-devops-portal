@@ -1,15 +1,26 @@
 ---
-title: "Cloudflare Pages Multi-Project Backup"
-description: "Автоматичен backup на няколко проекта към Cloudflare Pages директория с rsync и логване с timestamp."
-pubDate: 2026-09-10
-category: "Backup"
-tags: ["Backup", "Rsync", "Cloudflare", "Bash", "Cron"]
-author: "LinuxDev Team"
-version: "1.0.0"
-language: "bash"
-dependencies: ["rsync", "bash"]
-usage: "./cloudflare-backup.sh"
+title: Cloudflare Pages Multi-Project Backup
+description: >-
+  Автоматичен backup на няколко проекта към Cloudflare Pages директория с rsync
+  и логване с timestamp.
+pubDate: 2026-09-10T00:00:00.000Z
+category: Backup
+tags:
+  - Backup
+  - Rsync
+  - Cloudflare
+  - Bash
+  - Cron
+author: LinuxDev Team
+version: 1.0.0
+language: bash
+dependencies:
+  - rsync
+  - bash
+usage: ./cloudflare-backup.sh
 featured: true
+draft: false
+heroImageAlt: ''
 ---
 
 ## Какво прави

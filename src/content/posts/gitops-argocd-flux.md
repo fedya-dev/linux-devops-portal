@@ -1,14 +1,22 @@
 ---
-title: "GitOps с ArgoCD + Flux: Сравнение и Best Practices"
-description: "Детайлен анализ на двата водещи GitOps инструмента. Кога да избереш ArgoCD, кога Flux, как се комбинират и практически best practices от production."
-pubDate: 2026-09-08
-category: "DevOps"
-tags: ["GitOps", "ArgoCD", "Flux", "Kubernetes", "CI/CD"]
-author: "LinuxDev Team"
+title: 'GitOps с ArgoCD + Flux: Сравнение и Best Practices'
+description: >-
+  Детайлен анализ на двата водещи GitOps инструмента. Кога да избереш ArgoCD,
+  кога Flux, как се комбинират и практически best practices от production.
+pubDate: 2026-09-08T00:00:00.000Z
+category: DevOps
+tags:
+  - GitOps
+  - ArgoCD
+  - Flux
+  - Kubernetes
+  - CI/CD
+author: LinuxDev Team
 featured: true
-readTime: "15 мин"
-heroImage: "/images/devops/gitops-argocd-flux.webp"
-heroImageAlt: "ArgoCD и Flux сравнение"
+readTime: 15 мин
+heroImage: /images/devops/gitops-argocd-flux.webp
+heroImageAlt: ArgoCD и Flux сравнение
+draft: false
 ---
 
 ## Какво е GitOps и защо всички говорят за него

@@ -1,15 +1,23 @@
 ---
-title: "eBPF Hands-on: Writing your first XDP program"
-description: "Напиши и зареди първата си XDP програма. От hello-world до packet drop/pass."
-heroImage: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&q=80"
-heroImageAlt: "Server infrastructure"
-pubDate: 2026-08-28
-category: "Linux"
-level: "Advanced"
-duration: "30 мин"
-tags: ["eBPF", "XDP", "Networking", "C"]
-prerequisites: ["C basics", "Linux networking", "clang/llvm"]
+title: 'eBPF Hands-on: Writing your first XDP program'
+description: Напиши и зареди първата си XDP програма. От hello-world до packet drop/pass.
+heroImage: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&q=80'
+heroImageAlt: Server infrastructure
+pubDate: 2026-08-28T00:00:00.000Z
+category: Linux
+level: Advanced
+duration: 30 мин
+tags:
+  - eBPF
+  - XDP
+  - Networking
+  - C
+prerequisites:
+  - C basics
+  - Linux networking
+  - clang/llvm
 featured: true
+draft: false
 ---
 
 ## Какво е XDP?

@@ -1,14 +1,23 @@
 ---
-title: "Bash scripting: 10 patterns, които използвам всеки ден"
-description: "Практични Bash patterns от реален production опит. Error handling, argument parsing, logging, trap handlers и още — с примери, които можеш да копираш веднага."
-pubDate: 2026-09-12
-category: "DevOps"
-tags: ["Bash", "Scripting", "Linux", "Automation", "Shell"]
-author: "LinuxDev Team"
+title: 'Bash scripting: 10 patterns, които използвам всеки ден'
+description: >-
+  Практични Bash patterns от реален production опит. Error handling, argument
+  parsing, logging, trap handlers и още — с примери, които можеш да копираш
+  веднага.
+pubDate: 2026-09-12T00:00:00.000Z
+category: DevOps
+tags:
+  - Bash
+  - Scripting
+  - Linux
+  - Automation
+  - Shell
+author: LinuxDev Team
 featured: false
-readTime: "10 мин"
-heroImage: "/images/tools/bash-scripting-patterns.webp"
-heroImageAlt: "Bash scripting patterns"
+readTime: 10 мин
+heroImage: /images/tools/bash-scripting-patterns.webp
+heroImageAlt: Bash scripting patterns
+draft: false
 ---
 
 Писал съм стотици Bash скриптове. Повечето са били за автоматизация на повтарящи се задачи — deploy, backup, log rotation, мониторинг. Някои са били елегантни. Други са били катастрофи, които са изтривали production директории в 3 часа сутринта.

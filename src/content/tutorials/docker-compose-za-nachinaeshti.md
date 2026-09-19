@@ -1,18 +1,26 @@
 ---
-title: "Docker Compose: Multi-Container приложения на практика"
-description: "Пълен наръчник за Docker Compose от нулата. Как да управляваш множество контейнери заедно, как да дефинираш услуги, мрежи и volumes в YAML, и как да пуснеш реален WordPress + MySQL + Redis stack."
-pubDate: 2026-09-11
-category: "DevOps"
-level: "Beginner"
-duration: "35 мин"
-tags: ["Docker", "Docker Compose", "Containers", "DevOps"]
+title: 'Docker Compose: Multi-Container приложения на практика'
+description: >-
+  Пълен наръчник за Docker Compose от нулата. Как да управляваш множество
+  контейнери заедно, как да дефинираш услуги, мрежи и volumes в YAML, и как да
+  пуснеш реален WordPress + MySQL + Redis stack.
+pubDate: 2026-09-11T00:00:00.000Z
+category: DevOps
+level: Beginner
+duration: 35 мин
+tags:
+  - Docker
+  - Docker Compose
+  - Containers
+  - DevOps
 prerequisites:
-  - "Docker инсталиран (виж урока 'Docker за начинаещи')"
-  - "Основни познания по YAML синтаксис"
-  - "Разбиране какво е контейнер, образ и volume"
+  - Docker инсталиран (виж урока 'Docker за начинаещи')
+  - Основни познания по YAML синтаксис
+  - 'Разбиране какво е контейнер, образ и volume'
 featured: true
-heroImage: "/images/devops/docker-compose.webp"
-heroImageAlt: "Docker Compose multi-container setup"
+heroImage: /images/devops/docker-compose.webp
+heroImageAlt: Docker Compose multi-container setup
+draft: false
 ---
 
 В предишния урок пуснахме първия си контейнер с `docker run`. Работи — но само за един контейнер. Реалните приложения рядко са един контейнер. Обикновено имаш:

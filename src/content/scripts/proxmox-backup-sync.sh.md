@@ -1,15 +1,27 @@
 ---
-title: "Proxmox LXC Backup Sync"
-description: "Автоматично синхронизиране на LXC бекъпи от Proxmox сървър към локална директория с rsync, логване и проследяване на свалените файлове."
-pubDate: 2026-09-11
-category: "Backup"
-tags: ["Proxmox", "LXC", "Backup", "Rsync", "Bash"]
-author: "LinuxDev Team"
-version: "1.0.0"
-language: "bash"
-dependencies: ["rsync", "ssh", "bash"]
-usage: "./proxmox-backup-sync.sh"
+title: Proxmox LXC Backup Sync
+description: >-
+  Автоматично синхронизиране на LXC бекъпи от Proxmox сървър към локална
+  директория с rsync, логване и проследяване на свалените файлове.
+pubDate: 2026-09-11T00:00:00.000Z
+category: Backup
+tags:
+  - Proxmox
+  - LXC
+  - Backup
+  - Rsync
+  - Bash
+author: LinuxDev Team
+version: 1.0.0
+language: bash
+dependencies:
+  - rsync
+  - ssh
+  - bash
+usage: ./proxmox-backup-sync.sh
 featured: false
+draft: false
+heroImageAlt: ''
 ---
 
 ## Какво прави

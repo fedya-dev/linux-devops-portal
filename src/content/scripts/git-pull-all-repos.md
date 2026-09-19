@@ -1,15 +1,26 @@
 ---
-title: "Git Pull All Repos: Обнови всички локални репозитории с една команда"
-description: "Bash функция, която обхожда всички поддиректории в текущата папка и пуска git pull във всяко Git репо. Спестява часове при работа с много проекти."
-pubDate: 2026-09-14
-category: "Automation"
-tags: ["Git", "Bash", "Productivity", "Workflow"]
-author: "LinuxDev Team"
-version: "1.0.0"
-language: "bash"
-dependencies: ["git", "bash", "find"]
-usage: "gitpullall"
+title: 'Git Pull All Repos: Обнови всички локални репозитории с една команда'
+description: >-
+  Bash функция, която обхожда всички поддиректории в текущата папка и пуска git
+  pull във всяко Git репо. Спестява часове при работа с много проекти.
+pubDate: 2026-09-14T00:00:00.000Z
+category: Automation
+tags:
+  - Git
+  - Bash
+  - Productivity
+  - Workflow
+author: LinuxDev Team
+version: 1.0.0
+language: bash
+dependencies:
+  - git
+  - bash
+  - find
+usage: gitpullall
 featured: false
+draft: false
+heroImageAlt: ''
 ---
 
 ## Какво прави

@@ -1,15 +1,27 @@
 ---
-title: "Git Push Automation & NPM Helper"
-description: "Bash функции и NPM скриптове за автоматизация на ежедневните Git push процеси и build/preview команди."
-pubDate: 2026-09-13
-category: "Automation"
-tags: ["Git", "Bash", "NPM", "Productivity", "Workflow"]
-author: "LinuxDev Team"
-version: "1.0.0"
-language: "bash"
-dependencies: ["git", "npm", "bash"]
-usage: "gp [commit message]"
+title: Git Push Automation & NPM Helper
+description: >-
+  Bash функции и NPM скриптове за автоматизация на ежедневните Git push процеси
+  и build/preview команди.
+pubDate: 2026-09-13T00:00:00.000Z
+category: Automation
+tags:
+  - Git
+  - Bash
+  - NPM
+  - Productivity
+  - Workflow
+author: LinuxDev Team
+version: 1.0.0
+language: bash
+dependencies:
+  - git
+  - npm
+  - bash
+usage: 'gp [commit message]'
 featured: true
+draft: false
+heroImageAlt: ''
 ---
 
 ## Какво прави

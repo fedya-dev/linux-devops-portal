@@ -1,15 +1,26 @@
 ---
-title: "Windows Update Control: Блокиране и възстановяване на ъпдейтите"
-description: "Два batch скрипта за пълен контрол над Windows Update на Windows 11 — единият блокира всички ъпдейти, другият възстановява настройките по подразбиране."
-pubDate: 2026-09-16
-category: "Automation"
-tags: ["Windows", "Windows Update", "Batch", "Automation", "Scripts"]
-author: "LinuxDev Team"
-version: "1.0.0"
-language: "other"
-dependencies: ["Windows 11 Pro", "Administrator rights"]
-usage: "Десен бутон → Run as administrator"
+title: 'Windows Update Control: Блокиране и възстановяване на ъпдейтите'
+description: >-
+  Два batch скрипта за пълен контрол над Windows Update на Windows 11 — единият
+  блокира всички ъпдейти, другият възстановява настройките по подразбиране.
+pubDate: 2026-09-16T00:00:00.000Z
+category: Automation
+tags:
+  - Windows
+  - Windows Update
+  - Batch
+  - Automation
+  - Scripts
+author: LinuxDev Team
+version: 1.0.0
+language: other
+dependencies:
+  - Windows 11 Pro
+  - Administrator rights
+usage: Десен бутон → Run as administrator
 featured: false
+draft: false
+heroImageAlt: ''
 ---
 
 > ⚠️ **Сериозно предупреждение:** Windows Update носи **security patches**. Ако го блокираш за постоянно, системата ти остава уязвима към нови експлоити. Използвай тези скриптове **само** на:

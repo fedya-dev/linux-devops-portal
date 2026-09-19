@@ -2,13 +2,13 @@
 title: 'Как да инсталираме Astro – стъпка по стъпка'
 description: >-
   Наскоро започнах да работя с Astro и останах очарован. В тази статия ще ви покажа какво е Astro, как да го инсталирате, каква е структурата на проекта и как да започнете да го използвате.
-pubDate: 2026-09-12T00:00:00.000Z
+pubDate: 2026-09-19T18:00:00.000Z
 category: DevOps
 tags: [Astro, JavaScript, Web Development, Frontend]
 author: LinuxDev Team
 featured: false
 readTime: 10 мин
-heroImage: /images/kak-da-instalirame-astro.webp
+heroImage: /images/devops/kak-da-instalirame-astro.webp
 heroImageAlt: Astro framework installation guide
 level: Beginner
 duration: 10 мин
